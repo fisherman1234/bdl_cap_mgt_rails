@@ -1,0 +1,72 @@
+%table{:border=>0, :style=>"width:100%"}
+  %tr
+    %td
+      %table
+        - form_for(@stock) do |f|       
+          %tr
+            %td In charge
+            %td= select("stock", "user_id", User.find(:all).collect {|u| [u.initiales,u.id]}, {:include_blank => '==Choisir=='})
+          %tr
+            %td In portfolio
+            %td= f.check_box :is_in_portfolio
+          %tr
+            %td Flagged
+            %td= f.check_box :flagged
+          %tr
+            %td Flag date
+            %td= f.text_field :flag_date, :class => "date_picker"
+          %tr
+            %td
+            %td= f.submit
+    %td
+      %h3 Available analysis
+      %table
+        %tr Analysis list
+  %tr
+    %td
+      - form_for(@stock) do |f| 
+        %table
+          %tr
+            %h3 Stock properties
+          %tr
+            %td Sector
+            %td= select("stock", "sector_id", Sector.find(:all).collect {|u| [u.sector_name,u.id]})
+          %tr
+            %td Stock name
+            %td= f.text_field :stock_name
+          %tr
+            %td Ticker
+            %td= f.text_field :ticker
+          %tr
+            %td
+            %td= f.submit
+    %td
+      %table
+        - form_for(@stock) do |f| 
+          %tr
+            %h3 Rating
+          %tr
+            %td{:class => "tiny-tiny-input"}
+              = radio_button("stock", "rating", "Good business")
+              Good business
+          %tr
+            %td
+              = radio_button("stock", "rating", "Neutral")
+              Neutral
+          %tr
+            %td
+              = radio_button("stock", "rating", "Bad business")
+              Bad business
+          %tr
+            %td
+            %td= f.submit
+  %tr
+    %td{:colspan=>2}
+      %table{:width=>'100%', :class => "main-form-no-border"}
+        - form_for(@stock) do |f|
+          %tr
+            %td{:colspan=>2,:style=>'width:100%'}= f.text_area :investment_case
+          %tr
+            %td{:colspan=>2,:style=>'width:100%'}= f.submit
+  
+  

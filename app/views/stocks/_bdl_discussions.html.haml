@@ -1,0 +1,18 @@
+%p
+  %a{:href=> "#", :id=>"add_discussion" ,:onClick => "add_window('bdl_discussion', '1000', '500');", :class => "button"} Add a discussion
+
+
+%table{:border=>0, :class=>"main-form"}
+  %thead
+    %th Discussion date
+    %th BDL view 
+    %th Stock price
+    %th BDL Position
+  %tbody
+    - @stock.bdl_discussions.each do |discussion|
+      %tr
+        %td
+          %a{:href=>"#", :onclick=>"edit_window('bdl_discussion',"+discussion.id.to_s+", 1000, 500)"}= discussion.discussion_date
+        %td= strip_tags(discussion.view_bdl).to_s[0..100]+' ...'
+        %td= discussion.stock_price
+        %td= discussion.position_bdl

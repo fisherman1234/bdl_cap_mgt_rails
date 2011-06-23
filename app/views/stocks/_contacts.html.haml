@@ -1,0 +1,15 @@
+%table{:border=>0, :class=>"main-form"}
+  %thead
+    %th Job title
+    %th Name
+    %th Position
+    %th Email
+    %th Téléphone
+  %tbody
+    - @stock.contacts.each do |mr|
+      %tr
+        %td= mr.job_title
+        %td= mr.name
+        %td= mr.title
+        %td= mr.email
+        %td= mr.telephone

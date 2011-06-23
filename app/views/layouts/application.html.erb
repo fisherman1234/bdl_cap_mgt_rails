@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Etude Legendre</title>
+  <%= stylesheet_link_tag :all, :media=>:all %>
+  <%= javascript_include_tag  "jquery", "jquery-ui", "jquery.menu","jquery.dataTables","jquery.hotkeys", "jquery.form", "nested_form", "jquery.blockUI", "jquery.ui.datepicker-fr", "application"%>
+
+  <%= csrf_meta_tag %>
+
+
+  
+</head>
+<body>
+
+
+
+
+<div id="header">
+  <% if @title%>
+    <h1><%=@title%></h1>
+  <%end%>
+</div>
+
+<div id="page-content-container">
+  <%= yield %>
+</div>
+<%= javascript_include_tag "layout"%>
+
+</body>
+</html>

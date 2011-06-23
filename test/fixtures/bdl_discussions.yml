@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  discussion_date: 2011-06-23
+  stock_id: 1
+  view_bdl: MyText
+  alert_bdl: 
+  stock_price: MyString
+  position_bdl: MyString
+
+two:
+  discussion_date: 2011-06-23
+  stock_id: 1
+  view_bdl: MyText
+  alert_bdl: 
+  stock_price: MyString
+  position_bdl: MyString

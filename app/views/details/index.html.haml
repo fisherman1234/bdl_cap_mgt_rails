@@ -1,0 +1,14 @@
+%h1 Studies
+
+%table{:border=>0, :class=>"main-form"}
+  %thead
+    %th Sector
+    %th Date
+    %th Title
+  %tbody
+    - @details.each do |detail|
+      %tr
+        %td
+          %a{:href=>'/sectors/'+detail.sector_id.to_s}= detail.sector.sector_name
+        %td= detail.updated_at
+        %td= link_to detail.sector_analysis_title, edit_detail_path(detail)

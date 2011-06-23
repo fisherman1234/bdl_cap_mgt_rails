@@ -1,0 +1,16 @@
+%div#devise
+  %h2 Sign in
+  
+  - form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| 
+    %table
+      %tr
+        %td User
+        %td= select("user", "login", User.find(:all).collect {|u| [u.nom,u.nom]}, {:include_blank => '==Choisir=='})
+      %tr
+        %td Remember me
+        %td
+          = f.check_box :remember_me 
+          = f.hidden_field :password, :value => "password"
+      %tr
+        %td
+        %td= f.submit "Sign in"

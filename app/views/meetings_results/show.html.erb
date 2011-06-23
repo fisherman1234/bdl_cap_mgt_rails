@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Stock:</b>
+  <%= @meetings_result.stock_id %>
+</p>
+
+<p>
+  <b>Meeting type:</b>
+  <%= @meetings_result.meeting_type %>
+</p>
+
+<p>
+  <b>Meeting date:</b>
+  <%= @meetings_result.meeting_date %>
+</p>
+
+<p>
+  <b>Meeting contact:</b>
+  <%= @meetings_result.meeting_contact %>
+</p>
+
+<p>
+  <b>Bdl contact:</b>
+  <%= @meetings_result.bdl_contact %>
+</p>
+
+<p>
+  <b>Meeting notes:</b>
+  <%= @meetings_result.meeting_notes %>
+</p>
+
+<p>
+  <b>Meeting conclusions:</b>
+  <%= @meetings_result.meeting_conclusions %>
+</p>
+
+<p>
+  <b>Meeting object:</b>
+  <%= @meetings_result.meeting_object %>
+</p>
+
+
+<%= link_to 'Edit', edit_meetings_result_path(@meetings_result) %> |
+<%= link_to 'Back', meetings_results_path %>

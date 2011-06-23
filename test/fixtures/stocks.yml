@@ -1,0 +1,37 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  stock_name: 
+  sector_id: 1
+  in_charge: 1
+  environment: MyText
+  business_description: MyText
+  competition: MyText
+  management: MyText
+  is_in_portfolio: 1
+  valorisation: MyText
+  investment_case: MyText
+  investment_risks_macro: MyText
+  investment_risks_micro: MyText
+  rating: MyString
+  ticker: MyString
+  flagged: 1
+  flag_date: 1
+
+two:
+  stock_name: 
+  sector_id: 1
+  in_charge: 1
+  environment: MyText
+  business_description: MyText
+  competition: MyText
+  management: MyText
+  is_in_portfolio: 1
+  valorisation: MyText
+  investment_case: MyText
+  investment_risks_macro: MyText
+  investment_risks_micro: MyText
+  rating: MyString
+  ticker: MyString
+  flagged: 1
+  flag_date: 1

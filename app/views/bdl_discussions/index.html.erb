@@ -1,0 +1,31 @@
+<h1>Listing bdl_discussions</h1>
+
+<table>
+  <tr>
+    <th>Discussion date</th>
+    <th>Stock</th>
+    <th>View bdl</th>
+    <th>Alert bdl</th>
+    <th>Stock price</th>
+    <th>Position bdl</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @bdl_discussions.each do |bdl_discussion| %>
+  <tr>
+    <td><%= bdl_discussion.discussion_date %></td>
+    <td><%= bdl_discussion.stock_id %></td>
+    <td><%= bdl_discussion.view_bdl %></td>
+    <td><%= bdl_discussion.alert_bdl %></td>
+    <td><%= bdl_discussion.stock_price %></td>
+    <td><%= bdl_discussion.position_bdl %></td>
+    <td><%= link_to 'Show', bdl_discussion %></td>
+    <td><%= link_to 'Edit', edit_bdl_discussion_path(bdl_discussion) %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Bdl discussion', new_bdl_discussion_path %>

@@ -1,0 +1,81 @@
+%table{:style=>"width:100%"}
+  %tr
+    %td
+      %h3 Find a stock
+      %input{:id=>'find_stock'}
+      %h3 Find a sector
+      %input{:id=>'find_sector'}
+      %h3 Full text search
+      %input{:id=>'full_text_search'}
+      %button{:id=>'search'} Search
+      
+    %td
+      %table{:style=>"width:100%"}
+        %tr
+          %td
+            %h3 My last stocks
+        %tr
+          %td
+            %table{:style=>"width:100%", :border=>1}
+              %tr
+                %td Stock
+                %td Rating
+              - @user.stocks.find(:all, :order => 'updated_at desc', :limit => 5).each do |stock|
+                %tr
+                  %td
+                    %a{:href=>'/stocks/'+stock.id.to_s+'/edit'}= stock.stock_name
+                  %td= stock.rating
+        %tr
+          %td 
+            %a{:href => '/stocks?type=my_stocks'} My stocks
+            &nbsp;//
+            %a{:href => '/stocks?type=my_flagged_stocks'} My flagged stocks
+        %tr
+          %td
+            %h3 Queries
+        %tr
+          %td
+            %ul
+              %li
+                %a{:href => '/stocks?type=portfolio'} Portfolio
+              %li
+                Flagged stocks : 
+                %a{:href => '/stocks?type=flagged'} Yes
+                &nbsp;//
+                %a{:href => '/stocks?type=not_flagged'} No 
+              %li
+                BDL Position :
+                %a{:href => '/stocks?type=posneutral'} Neutral
+                &nbsp;//
+                %a{:href => '/stocks?type=poslong'} Long
+                &nbsp;//
+                %a{:href => '/stocks?type=posshort'} Short
+              %li
+                Rating : 
+                %a{:href => '/stocks?type=good_business'} Good business
+                &nbsp;//
+                %a{:href => '/stocks?type=bad_business'} Bad business
+                &nbsp;//
+                %a{:href => '/stocks?type=neutral'} Neutral
+              %li
+                %a{:href => '/contacts'} Contact list
+              %li
+                %a{:href => '/details'} Studies
+  %tr
+    %td{:colspan=>2}
+      %h3 Upcoming stocks
+  %tr
+    %td{:colspan=>2}
+      %table{:style=>"width:100%",:border=>1}
+        %thead
+          %th Stock name
+          %th Flag date
+          %th Sector
+        %tbody
+          - @user.stocks.find(:all, :limit => 5, :order => 'flag_date desc', :conditions=>{:flagged=>1}).each do |stock|
+            %tr
+              %td
+                %a{:href=>'/stocks/'+stock.id.to_s+'/edit'}= stock.stock_name
+              %td{:class => date_history(stock.flag_date)}= stock.flag_date
+              %td
+                %a{:href=>'/sectors/'+stock.sector_id.to_s}= stock.sector.sector_name

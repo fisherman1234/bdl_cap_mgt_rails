@@ -1,0 +1,59 @@
+%div{:class=>"tabs"}
+  %ul
+    %li
+      %a{:href=> "#tabs-11"} Investment risks
+    %li
+      %a{:href=> "#tabs-12"} Business description
+    %li
+      %a{:href=> "#tabs-13"} Competition
+    %li                                
+      %a{:href=> "#tabs-14"} Management
+
+  %div#tabs-11
+    %table{:border=>0, :class=>"main-form"}
+      - form_for(@stock) do |f| 
+        %tr
+          %td{:width=>'20%'}
+            %h3 Investment risks macro
+          %td
+            = f.text_area :investment_risks_macro
+        %tr
+          %td
+            %h3 Investment risks micro
+          %td
+            = f.text_area :investment_risks_micro
+            = f.submit
+        
+  
+  %div#tabs-12
+    %table{:border=>0, :class=>"main-form"}
+      - form_for(@stock) do |f| 
+        %tr
+          %td{:width=>'20%'}
+            %h3 Business description
+          %td
+            = f.text_area :business_description
+            = f.submit
+    
+    
+  %div#tabs-13
+    %table{:border=>0, :class=>"main-form"}
+      - form_for(@stock) do |f| 
+        %tr
+          %td{:width=>'20%'}
+            %h3 Competition
+          %td
+            = f.text_area :competition
+            = f.submit
+    
+    
+  %div#tabs-14
+    %table{:border=>0, :class=>"main-form"}
+      - form_for(@stock) do |f| 
+        %tr
+          %td{:width=>'20%'}
+            %h3 Management
+          %td
+            = f.text_area :management
+            = f.submit
+    

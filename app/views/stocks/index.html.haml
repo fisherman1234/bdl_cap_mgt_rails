@@ -1,0 +1,35 @@
+%div#navbar
+  %ul
+    %li
+      %a{:href=>"#", :OnClick=>"history.go( -1 )"} Back
+    
+%div#page-content
+  %p 
+    Color code : 
+    %span{:class=>"overdue"} Overdue flag 
+    &nbsp;//
+    %span{:class=>"upcoming"} Flag coming in the next 7 days
+    &nbsp;//
+    %span{:class=>"later"} Coming in more than 7 days
+
+  %table{:border=>0, :class=>"main-form"} 
+    %thead
+      %th Stock name
+      %th In Portfolio
+      %th Rating
+      %th Sector
+      %th Position
+      %th Flag date
+      %th User
+    %tbody
+      - @stocks.each do |stock|
+        %tr
+          %td= link_to stock.stock_name, edit_stock_path(stock)
+          %td= stock.is_in_portfolio
+          %td= stock.rating
+          %td
+            %a{:href=>'/sectors/'+stock.sector_id.to_s}= stock.sector.sector_name
+          %td= stock.rating
+          %td{:class => date_history(stock.flag_date)}= stock.flag_date
+          %td= stock.user.try(:initiales)
+        

@@ -1,0 +1,21 @@
+%h1 Contacts
+
+%table{:border=>0, :class=>"main-form"}
+  %thead
+    %th Name
+    %th Title
+    %th Email
+    %th Telephone
+    %th Job title
+    %th Stock
+  %tbody
+    - @contacts.each do |contact|
+      %tr
+        %td= link_to contact.name, edit_contact_path(contact) 
+        %td= contact.title
+        %td= contact.email
+        %td= contact.telephone
+        %td= contact.job_title
+        %td
+          %a{:href=>'/stocks/'+contact.stock.id.to_s+'/edit'}= contact.stock.stock_name
+          

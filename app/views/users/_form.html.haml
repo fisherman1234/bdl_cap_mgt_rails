@@ -1,0 +1,16 @@
+- form_for(@user) do |f| 
+  %table
+    %tr
+      %td Name
+      %td= f.text_field :nom
+    %tr
+      %td Initiales
+      %td= f.text_field :initiales
+    %tr
+      %td Email
+      %td
+        = f.text_field :email
+        = f.hidden_field :password, :value => "password"
+      
+ 
+  = f.submit

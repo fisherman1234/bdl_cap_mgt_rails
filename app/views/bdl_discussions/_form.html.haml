@@ -1,0 +1,18 @@
+- form_for(@bdl_discussion) do |f| 
+  =f.hidden_field :stock_id
+  %table{:class=>"main-form"}
+    %tr
+      %td Date
+      %td= f.date_select :discussion_date
+    %tr
+      %td BDL View
+      %td= f.text_area :view_bdl
+    %tr
+      %td Stock price
+      %td= f.text_field :stock_price
+    %tr
+      %td BDL Position
+      %td= f.select :position_bdl, ["Neutral","Long","Short"]
+    %tr{:class=>"hide"}
+      %td
+      %td= f.submit

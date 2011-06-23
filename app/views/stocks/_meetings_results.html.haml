@@ -1,0 +1,15 @@
+%table{:border=>0, :class=>"main-form"}
+  %thead
+    %th Meeting type
+    %th Meeting date
+    %th Contact
+    %th BDL Contact
+    %th Oject
+  %tbody
+    - @stock.meetings_results.each do |mr|
+      %tr
+        %td= mr.meeting_type
+        %td= mr.meeting_date
+        %td= mr.meeting_contact
+        %td= mr.bdl_contact
+        %td= mr.meeting_object

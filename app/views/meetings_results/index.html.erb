@@ -1,0 +1,35 @@
+<h1>Listing meetings_results</h1>
+
+<table>
+  <tr>
+    <th>Stock</th>
+    <th>Meeting type</th>
+    <th>Meeting date</th>
+    <th>Meeting contact</th>
+    <th>Bdl contact</th>
+    <th>Meeting notes</th>
+    <th>Meeting conclusions</th>
+    <th>Meeting object</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @meetings_results.each do |meetings_result| %>
+  <tr>
+    <td><%= meetings_result.stock_id %></td>
+    <td><%= meetings_result.meeting_type %></td>
+    <td><%= meetings_result.meeting_date %></td>
+    <td><%= meetings_result.meeting_contact %></td>
+    <td><%= meetings_result.bdl_contact %></td>
+    <td><%= meetings_result.meeting_notes %></td>
+    <td><%= meetings_result.meeting_conclusions %></td>
+    <td><%= meetings_result.meeting_object %></td>
+    <td><%= link_to 'Show', meetings_result %></td>
+    <td><%= link_to 'Edit', edit_meetings_result_path(meetings_result) %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Meetings result', new_meetings_result_path %>

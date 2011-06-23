@@ -1,0 +1,35 @@
+%h3 
+  Sector : 
+  = @stock.sector.sector_name
+  %input{:type=> "hidden", :value => @stock.id, :id=>"stock_id"}
+  %input{:type=> "hidden", :value => @stock.sector_id, :id=>"sector_id"}
+
+%div{:class=>"tabs"}
+  %ul
+    %li
+      %a{:href=> "#tabs-1"} Overview
+    %li
+      %a{:href=> "#tabs-2"} Analysis
+    %li                                
+      %a{:href=> "#tabs-4"} BDL view
+    %li                                
+      %a{:href=> "#tabs-6"} Meetings results
+    %li                                
+      %a{:href=> "#tabs-5"} Contacts
+
+  
+  %div#tabs-1
+    = render 'overview'
+  -if !@stock.new_record?
+    %div#tabs-2
+      = render 'analysis'
+    
+    %div#tabs-4
+      = render 'bdl_discussions'
+
+    %div#tabs-5
+      = render 'contacts'
+  
+    %div#tabs-6
+      = render 'meetings_results'
+        

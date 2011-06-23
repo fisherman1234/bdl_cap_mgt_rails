@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Discussion date:</b>
+  <%= @bdl_discussion.discussion_date %>
+</p>
+
+<p>
+  <b>Stock:</b>
+  <%= @bdl_discussion.stock_id %>
+</p>
+
+<p>
+  <b>View bdl:</b>
+  <%= @bdl_discussion.view_bdl %>
+</p>
+
+<p>
+  <b>Alert bdl:</b>
+  <%= @bdl_discussion.alert_bdl %>
+</p>
+
+<p>
+  <b>Stock price:</b>
+  <%= @bdl_discussion.stock_price %>
+</p>
+
+<p>
+  <b>Position bdl:</b>
+  <%= @bdl_discussion.position_bdl %>
+</p>
+
+
+<%= link_to 'Edit', edit_bdl_discussion_path(@bdl_discussion) %> |
+<%= link_to 'Back', bdl_discussions_path %>

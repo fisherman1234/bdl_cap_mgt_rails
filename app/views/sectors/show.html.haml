@@ -1,0 +1,42 @@
+%h3 
+  Sector : 
+  = @sector.sector_name
+
+%div{:class=>"tabs"}
+  %ul
+    %li
+      %a{:href=> "#tabs-1"} Stocks
+    %li
+      %a{:href=> "#tabs-2"} Analysis
+
+
+  
+  %div#tabs-1
+    %table{:border=>0, :class=>"main-form"}
+      %thead
+        %th Stock
+        %th In charge
+        %th In portfolio ?
+        %th Rating
+      %tbody
+        - @sector.stocks.each do |stock|
+          %tr
+            %td
+              %a{:href=>'/stocks/'+stock.id.to_s+'/edit'}= stock.stock_name
+            %td= stock.user.try(:initiales)
+            %td= stock.is_in_portfolio
+            %td= stock.rating
+        
+
+  %div#tabs-2
+    %table{:border=>0, :class=>"main-form"}
+      %thead
+        %th Date
+        %th Title
+        %th Abstract
+      %tbody
+        - @sector.details.each do |detail|
+          %tr
+            %td= detail.created_at
+            %td= strip_tags(detail.sector_analysis_title)
+            %td= strip_tags(detail.sector_analysis_text).to_s[0..100]+' ...'

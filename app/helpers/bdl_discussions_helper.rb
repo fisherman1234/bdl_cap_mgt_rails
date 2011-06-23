@@ -1,0 +1,2 @@
+module BdlDiscussionsHelper
+end

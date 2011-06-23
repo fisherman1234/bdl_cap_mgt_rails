@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  sector_id: MyString
+  sector_analysis_title: MyString
+  sector_analysis_text: MyText
+
+two:
+  sector_id: MyString
+  sector_analysis_title: MyString
+  sector_analysis_text: MyText

@@ -1,0 +1,19 @@
+%h1 Users
+%table
+  %thead
+    %th Name
+    %th Initials
+    %th Email
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.nom
+        %td= user.initiales
+        %td= user.email
+        %td= link_to 'Edit', edit_user_path(user)
+        %td= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete
+        
+
+
+
+= link_to 'New User', new_user_path
