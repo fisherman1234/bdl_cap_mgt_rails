@@ -2,12 +2,14 @@
   %tr
     %td
       %h3 Find a stock
-      %input{:id=>'find_stock'}
+      %input{:id=>'stock_search'}
       %h3 Find a sector
-      %input{:id=>'find_sector'}
+      %input{:id=>'sector_search'}
       %h3 Full text search
-      %input{:id=>'full_text_search'}
-      %button{:id=>'search'} Search
+      %form{:method=>"get", "action"=>"/settings/search"}
+        %input{:id=>'full_text_search', :name=>"query"}
+        
+        %input{:id=>'submit', :type=>:submit} 
       
     %td
       %table{:style=>"width:100%"}
@@ -20,11 +22,12 @@
               %tr
                 %td Stock
                 %td Rating
-              - @user.stocks.find(:all, :order => 'updated_at desc', :limit => 5).each do |stock|
-                %tr
-                  %td
-                    %a{:href=>'/stocks/'+stock.id.to_s+'/edit'}= stock.stock_name
-                  %td= stock.rating
+              - if @user
+                - @user.stocks.find(:all, :order => 'updated_at desc', :limit => 5).each do |stock|
+                  %tr
+                    %td
+                      %a{:href=>'/stocks/'+stock.id.to_s+'/edit'}= stock.stock_name
+                    %td= stock.rating
         %tr
           %td 
             %a{:href => '/stocks?type=my_stocks'} My stocks
@@ -72,10 +75,23 @@
           %th Flag date
           %th Sector
         %tbody
-          - @user.stocks.find(:all, :limit => 5, :order => 'flag_date desc', :conditions=>{:flagged=>1}).each do |stock|
-            %tr
-              %td
-                %a{:href=>'/stocks/'+stock.id.to_s+'/edit'}= stock.stock_name
-              %td{:class => date_history(stock.flag_date)}= stock.flag_date
-              %td
-                %a{:href=>'/sectors/'+stock.sector_id.to_s}= stock.sector.sector_name
+          -if @user
+            - @user.stocks.find(:all, :limit => 5, :order => 'flag_date desc', :conditions=>{:flagged=>1}).each do |stock|
+              %tr
+                %td
+                  %a{:href=>'/stocks/'+stock.id.to_s+'/edit'}= stock.stock_name
+                %td{:class => date_history(stock.flag_date)}= stock.flag_date
+                %td
+                  %a{:href=>'/sectors/'+stock.sector_id.to_s}= stock.sector.sector_name
+                
+                
+%div#footer
+  %br
+  %br
+  %span#login
+    Logged in as 
+    =current_user.nom
+    %a{:href=>'/users/sign_out'} Sign out 
+    &nbsp;//
+    %a{:href=>'/settings'} Administration
+    

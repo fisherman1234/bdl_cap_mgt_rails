@@ -1,0 +1,9 @@
+%h1 New sector
+- form_for(@sector) do |f|       
+  %table
+    %tr
+      %td Sector name
+      %td= f.text_field :sector_name
+    %tr{:class=>"hide"}
+      %td
+      %td= f.submit

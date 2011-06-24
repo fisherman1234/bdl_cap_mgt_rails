@@ -1,4 +1,5 @@
 class MeetingsResultsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /meetings_results
   # GET /meetings_results.xml
   def index
@@ -25,7 +26,9 @@ class MeetingsResultsController < ApplicationController
   # GET /meetings_results/new.xml
   def new
     @meetings_result = MeetingsResult.new
-
+    if params[:stock]
+      @meetings_result.stock_id = params[:stock]
+    end
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @meetings_result }

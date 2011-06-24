@@ -1,0 +1,47 @@
+%div#navbar
+  %ul
+    %li
+      
+      %a{:href=>"javascript:history.back()"} Back
+      %a{:href=>"/"} Home
+
+%div#page-content
+  - form_for(@meetings_result) do |f| 
+    = f.hidden_field :stock_id
+  
+    %table{:class => 'main-form-no-border'}
+      %tr
+        %td Meeting type
+        %td{:colspan=>3}
+          = radio_button("meetings_result", "meeting_type", "Management meeting")
+          Management meeting
+          = radio_button("meetings_result", "meeting_type", "Analyst meeting")
+          Analyst meeting
+          = radio_button("meetings_result", "meeting_type", "Expert meeting")
+          Expert meeting
+          = radio_button("meetings_result", "meeting_type", "Results")
+          Results
+
+      %tr
+        %td Meeting contact
+        %td= f.text_field :meeting_contact
+        %td BDL contact
+        %td= select("meetings_result", "bdl_contact", User.find(:all).collect {|u| [u.nom,u.id]}, {:include_blank => '==Choisir=='})
+      %tr
+        %td Meeting date
+        %td= f.text_field :meeting_date, :class => "datepicker"
+        %td Meeting object
+        %td= f.text_field :meeting_object
+      %tr
+        %td 
+          Meeting notes
+          %a{:href=>"#", :onclick=>  'DisplayPopUpEditor("meetings_result_meeting_notes", "meetings_result[meeting_notes]");',:class => "button-edit"} Edit
+        %td{:colspan=>3}= f.text_area :meeting_notes
+      %tr
+        %td 
+          Meeting conclusions
+          %a{:href=>"#", :onclick=>  'DisplayPopUpEditor("meetings_result_meeting_conclusions", "meetings_result[meeting_conclusions]");',:class => "button-edit"} Edit
+        %td{:colspan=>3}= f.text_area :meeting_conclusions
+      %tr{:class=>'hide'}
+        %td 
+        %td= f.submit 

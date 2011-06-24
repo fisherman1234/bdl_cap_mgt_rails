@@ -1,4 +1,5 @@
 class ContactsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /contacts
   # GET /contacts.xml
   def index
@@ -25,7 +26,9 @@ class ContactsController < ApplicationController
   # GET /contacts/new.xml
   def new
     @contact = Contact.new
-
+    if params[:stock]
+      @contact.stock_id = params[:stock]
+    end
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @contact }

@@ -112,11 +112,130 @@ function submit_form(form){
 }
 
 
+function add_user(item_name, width, height){
+	stock = $('#stock_id').val();
+	sector = $('#sector_id').val();
+	$('body').append("<div id='add-item' style=''></div>");
+	console.log('/'+item_name+'s/new?stock='+stock+'+&sector='+sector+'  #new_'+item_name);
+	$('#add-item').load('/'+item_name+'s/new?stock='+stock+'+&sector='+sector+'  #new_'+item_name, function(){
+		primary_formatting();
+		$('#new_'+item_name).submit(function(event) {
+			event.preventDefault();
+		});
+		$('.hide').hide();
+	});
+     $( "#add-item" ).dialog({
+     			height: height,
+     			width: width,
+     			modal: true,
+				title: 'Add an item',
+				close: function(event, ui) {
+					$( "#add-item" ).remove(); 
+					//$('.recap-frais-consignation').load('/dossiers/'+$("#dossier_id").val()+'/encours_frais');
+					
+					},
+     			buttons: {
+					"Enregistrer": function() {
+								
+								$('#new_'+item_name).ajaxSubmit({url:'settings/new_user'});
+               					$( this ).dialog( "close" );
+								$( "#add-item" ).remove(); 
+								location.reload(true);
+
+               				},
+           				"Fermer": function() {
+                   					$( this ).dialog( "close" );
+									$( "#add-item" ).remove(); 
+
+                   				}
+                   	}			
+     });
+}
+
+function edit_user(item_name, id, width, height){
+	stock = $('#stock_id').val();
+	sector = $('#sector_id').val();
+	$('body').append("<div id='add-item' style=''></div>");
+	console.log('/'+item_name+'s/'+id+'/edit  #edit_'+item_name);
+	$('#add-item').load('/'+item_name+'s/'+id+'/edit  #edit_'+item_name+'_'+id, function(){
+		primary_formatting();
+		$('#edit_'+item_name).submit(function(event) {
+			event.preventDefault();
+		});
+		$('.hide').hide();
+	});
+     $( "#add-item" ).dialog({
+     			height: height,
+     			width: width,
+     			modal: true,
+				title: 'Edit an item',
+				close: function(event, ui) {
+					$( "#add-item" ).remove(); 
+					//$('.recap-frais-consignation').load('/dossiers/'+$("#dossier_id").val()+'/encours_frais');
+					
+					},
+     			buttons: {
+					"Supprimer": function() {
+								
+								$.post('/settings/'+id+'/destroy_user')
+               					$( this ).dialog( "close" );
+								$( "#add-item" ).remove(); 
+								location.reload(true);
+								
+								
+
+               				},
+					"Enregistrer": function() {
+								
+								$('#edit_'+item_name+'_'+id).ajaxSubmit({url:'/settings/'+id+'/update_user'});
+               					$( this ).dialog( "close" );
+								$( "#add-item" ).remove(); 
+								location.reload(true);
+
+               				},
+           				"Fermer": function() {
+                   					$( this ).dialog( "close" );
+									$( "#add-item" ).remove(); 
+
+                   				}
+                   	}			
+     });
+}
 
 
 
 
 
+function remove_stock(){
+	var id = prompt("Input stock ID");
+	$.ajax({
+	  url: '/stocks/'+id+'.js',
+	  success: function(data){
+			var password = prompt("You're about to destroy stock "+data.stock.stock_name+". Please input password");
+				if (password=='bdlcapmgt'){
+					$.post('/stocks/'+id+'/destroy'); 
+					alert('Stock has been removed');
+				}else{alert('Password wrong')}
+		},
+	  dataType: 'json'
+	});
+}
+
+
+function remove_sector(){
+	var id = prompt("Input sector ID");
+	$.ajax({
+	  url: '/sectors/'+id+'.js',
+	  success: function(data){
+			var password = prompt("You're about to destroy sector "+data.sector.sector_name+". Please input password");
+				if (password=='bdlcapmgt'){
+					$.post('/sectors/'+id+'/destroy'); 
+					alert('Sector has been removed');
+				}else{alert('Password wrong')}
+		},
+	  dataType: 'json'
+	});
+}
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 /*

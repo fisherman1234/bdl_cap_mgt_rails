@@ -1,6 +1,6 @@
 %h3 
   Sector : 
-  = @stock.sector.sector_name
+  = @stock.sector.try(:sector_name)
   %input{:type=> "hidden", :value => @stock.id, :id=>"stock_id"}
   %input{:type=> "hidden", :value => @stock.sector_id, :id=>"sector_id"}
 

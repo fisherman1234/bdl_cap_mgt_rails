@@ -10,50 +10,62 @@
       %a{:href=> "#tabs-14"} Management
 
   %div#tabs-11
-    %table{:border=>0, :class=>"main-form"}
-      - form_for(@stock) do |f| 
+    - form_for(@stock) do |f| 
+  
+      %table{:border=>0, :class=>"main-form", :style=>"width=>100%"}
         %tr
           %td{:width=>'20%'}
             %h3 Investment risks macro
-          %td
+            
+            %a{:href=>"#", :onclick=>  'DisplayPopUpEditor("stock_investment_risks_macro", "stock[investment_risks_macro]");',:class => "button-edit"} Edit
+            = f.submit
+          %td{:width=>'80%'}
+            %div{:style=>"width=>100%"}
             = f.text_area :investment_risks_macro
         %tr
           %td
             %h3 Investment risks micro
+            %a{:href=>"#", :onclick=>  'DisplayPopUpEditor("stock_investment_risks_macro", "stock[investment_risks_macro]");',:class => "button-edit"} Edit
+            = f.submit
           %td
             = f.text_area :investment_risks_micro
-            = f.submit
+            
         
   
   %div#tabs-12
-    %table{:border=>0, :class=>"main-form"}
-      - form_for(@stock) do |f| 
+    - form_for(@stock) do |f|  
+      %table{:border=>0, :class=>"main-form"}
         %tr
           %td{:width=>'20%'}
             %h3 Business description
+            %a{:href=>"#", :onclick=>  'DisplayPopUpEditor("stock_business_description", "stock[business_description]");',:class => "button-edit"} Edit
+            = f.submit
           %td
             = f.text_area :business_description
-            = f.submit
+            
     
     
   %div#tabs-13
-    %table{:border=>0, :class=>"main-form"}
-      - form_for(@stock) do |f| 
+    - form_for(@stock) do |f| 
+      %table{:border=>0, :class=>"main-form"}
         %tr
           %td{:width=>'20%'}
             %h3 Competition
+            %a{:href=>"#", :onclick=>  'DisplayPopUpEditor("stock_competition", "stock[competition]");',:class => "button-edit"} Edit
+            = f.submit
           %td
             = f.text_area :competition
-            = f.submit
     
     
   %div#tabs-14
-    %table{:border=>0, :class=>"main-form"}
-      - form_for(@stock) do |f| 
+    - form_for(@stock) do |f| 
+      %table{:border=>0, :class=>"main-form"}
+
         %tr
           %td{:width=>'20%'}
             %h3 Management
+            %a{:href=>"#", :onclick=>  'DisplayPopUpEditor("stock_management", "stock[management]");',:class => "button-edit"} Edit
+            = f.submit
           %td
             = f.text_area :management
-            = f.submit
     

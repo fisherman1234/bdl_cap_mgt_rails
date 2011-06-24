@@ -1,0 +1,132 @@
+%div#navbar
+  %ul
+    %li
+      
+      %a{:href=>"javascript:history.back()"} Back
+      %a{:href=>"/"} Home
+
+%div#page-content
+  - if !@stocks.empty?
+    %h3 Stocks
+    - @stocks.each do |stock|
+      %br
+      %a{:href=>"/stocks/"+stock.id.to_s+'/edit'}
+        %table{:class=>"main-form-no-margin"}
+          %tr
+            %td{:width=>"20%"} Stock name : 
+            %td= stock.stock_name
+      
+          -if excerpt(strip_tags(stock.environment), @query)
+            %tr
+              %td{:width=>"20%"} Environment : 
+              %td= highlight(excerpt(strip_tags(stock.environment), @query),@query)
+      
+          -if excerpt(strip_tags(stock.business_description), @query)
+            %tr
+              %td{:width=>"20%"} Business description : 
+              %td= highlight(excerpt(strip_tags(stock.business_description), @query),@query) 
+          
+          -if excerpt(strip_tags(stock.competition), @query)               
+            %tr
+              %td{:width=>"20%"} Competition : 
+              %td= highlight(excerpt(strip_tags(stock.competition), @query),@query)
+          
+          -if excerpt(strip_tags(stock.management), @query)              
+            %tr
+              %td{:width=>"20%"} Management : 
+              %td= highlight(excerpt(strip_tags(stock.management), @query),@query)
+          
+          -if excerpt(strip_tags(stock.investment_case), @query)                    
+            %tr
+              %td{:width=>"20%"} Investment case : 
+              %td= highlight(excerpt(strip_tags(stock.investment_case), @query),@query)
+      
+          -if excerpt(strip_tags(stock.investment_risks_macro), @query)                    
+            %tr
+              %td{:width=>"20%"} Investment risk macro : 
+              %td= highlight(excerpt(strip_tags(stock.investment_risks_macro), @query),@query)      
+      
+          -if excerpt(strip_tags(stock.investment_risks_micro), @query)                    
+            %tr
+              %td{:width=>"20%"} Investment risk micro :  
+              %td= highlight(excerpt(strip_tags(stock.investment_risks_micro), @query),@query)
+      
+          -if excerpt(strip_tags(stock.ticker), @query)                    
+            %tr
+              %td{:width=>"20%"} Ticker :  
+              %td= highlight(excerpt(strip_tags(stock.ticker), @query),@query)
+        
+  - if !@sectors.empty?
+    %h3 Sectors
+    - @sectors.each do |sector|
+      %br
+      %a{:href=>"/sectors/"+sector.id.to_s}
+        %table{:class=>"main-form-no-margin"}
+          %tr
+            %td{:width=>"20%"} Sector name : 
+            %td= highlight(excerpt(strip_tags(sector.sector_name), @query),@query)
+
+
+  - if !@contacts.empty?
+    %h3 Contacts
+    - @contacts.each do |contact|
+      %br
+      %a{:href=>"/contacts/"+contact.id.to_s+'/edit'}
+        %table{:class=>"main-form-no-margin"}
+          %tr
+            %td{:width=>"20%"} Name : 
+            %td= highlight(strip_tags(contact.name), @query)
+      
+      
+  - if !@discussions.empty?
+    %h3 Discussions
+    - @discussions.each do |discussion|
+      %br
+      %a{:href=>"/bdl_discussions/"+discussion.id.to_s+'/edit'}
+        %table{:class=>"main-form-no-margin"}
+          -if excerpt(strip_tags(discussion.view_bdl), @query)
+            %tr
+              %td{:width=>"20%"} Name : 
+              %td= highlight(excerpt(strip_tags(discussion.view_bdl), @query),@query)
+          -if excerpt(strip_tags(discussion.position_bdl), @query)
+            %tr
+              %td{:width=>"20%"} Name : 
+              %td= highlight(excerpt(strip_tags(discussion.position_bdl), @query),@query)
+              
+              
+  - if !@details.empty?
+    %h3 Studies
+    - @details.each do |detail|
+      %br
+      %a{:href=>"/details/"+detail.id.to_s+'/edit'}
+        %table{:class=>"main-form-no-margin"}
+          -if excerpt(strip_tags(detail.sector_analysis_title), @query)
+            %tr
+              %td{:width=>"20%"} Title : 
+              %td= highlight(excerpt(strip_tags(detail.sector_analysis_title), @query),@query)
+          -if excerpt(strip_tags(detail.sector_analysis_text), @query)
+            %tr
+              %td{:width=>"20%"} Content : 
+              %td= highlight(excerpt(strip_tags(detail.sector_analysis_text), @query),@query)
+              
+      
+  - if !@meetings.empty?
+    %h3 Meetings
+    - @meetings.each do |meeting|
+      %br
+      %a{:href=>"/meetings_results/"+meeting.id.to_s+'/edit'}
+        %table{:class=>"main-form-no-margin"}
+          -if excerpt(strip_tags(meeting.meeting_object), @query)
+            %tr
+              %td{:width=>"20%"} Object : 
+              %td= highlight(excerpt(strip_tags(meeting.meeting_object), @query),@query)
+              
+          -if excerpt(strip_tags(meeting.meeting_notes), @query)
+            %tr
+              %td{:width=>"20%"} Notes : 
+              %td= highlight(excerpt(strip_tags(meeting.meeting_notes), @query),@query)
+              
+          -if excerpt(strip_tags(meeting.meeting_conclusions), @query)
+            %tr
+              %td{:width=>"20%"} Conclusions : 
+              %td= highlight(excerpt(strip_tags(meeting.meeting_conclusions), @query),@query)

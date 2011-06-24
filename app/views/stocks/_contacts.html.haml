@@ -1,3 +1,6 @@
+%p
+  %a{:href=> "#", :id=>"add_discussion" ,:onClick => "add_window('contact', '1000', '300');", :class => "button"} Add a contact
+  
 %table{:border=>0, :class=>"main-form"}
   %thead
     %th Job title
@@ -9,7 +12,8 @@
     - @stock.contacts.each do |mr|
       %tr
         %td= mr.job_title
-        %td= mr.name
+        %td
+          %a{:href=>"#", :onclick=>"edit_window('contact',"+mr.id.to_s+", 1000, 300)"}= mr.name
         %td= mr.title
         %td= mr.email
         %td= mr.telephone

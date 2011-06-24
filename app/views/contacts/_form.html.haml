@@ -1,0 +1,35 @@
+%div#navbar
+  %ul
+    %li
+      
+      %a{:href=>"javascript:history.back()"} Back
+      %a{:href=>"/"} Home
+
+%div#page-content
+  - form_for(@contact) do |f|
+    =f.hidden_field :stock_id
+    %table{:style=> "width:100%"}
+      %tr
+        %td Name
+        %td= f.text_field :name
+        %td Position
+        %td= f.text_field :title
+      %tr
+        %td Job title
+        %td{:colspan=>3}
+          = radio_button("contact", "job_title", "IR")
+          IR
+          = radio_button("contact", "job_title", "Sell side analyst")
+          Sell side analyst
+          = radio_button("contact", "job_title", "Manager contact")
+          Manager contact
+          = radio_button("contact", "job_title", "Expert")
+          Expert
+        %tr
+          %td Email
+          %td= f.email_field :email
+          %td Telephone
+          %td= f.text_field :telephone, :class=>"phone"
+        %tr{:class=>"hide"}
+          %td
+          %td= f.submit

@@ -1,12 +1,18 @@
 class SectorsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /sectors
   # GET /sectors.xml
   def index
     @sectors = Sector.all
-
+    if params[:term]
+      @sectors = Sector.find(:all, :conditions => ["LOWER(sector_name) LIKE LOWER(?)", "%#{params[:term]}%"])
+    end
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @sectors }
+      format.js  { render :json => @sectors.map {|p| {  :label => p.sector_name  , :value => p.id}} }
+      
     end
   end
 
@@ -14,10 +20,11 @@ class SectorsController < ApplicationController
   # GET /sectors/1.xml
   def show
     @sector = Sector.find(params[:id])
-
+    @title =  "Sector : "+@sector.sector_name
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @sector }
+      format.js  { render :json => @sector }
     end
   end
 

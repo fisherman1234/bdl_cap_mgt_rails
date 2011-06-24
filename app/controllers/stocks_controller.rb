@@ -1,4 +1,5 @@
 class StocksController < ApplicationController
+  before_filter :authenticate_user!
   # GET /stocks
   # GET /stocks.xml
   def index
@@ -22,6 +23,13 @@ class StocksController < ApplicationController
         when 'neutral'
           @title = "Rating : Neutral"
           @stocks = Stock.where(:rating=>'Neutral')
+
+        when 'my_stocks'
+          @title = "My stocks"
+          @stocks = current_user.stocks
+        when 'my_flagged_stocks'
+          @title = "My flagged stocks"
+          @stocks = current_user.stocks.where(:flagged=>1)
         when 'portfolio'
           @title = "Stocks in portfolio"
           @stocks = Stock.where(:is_in_portfolio=>1)
@@ -51,12 +59,17 @@ class StocksController < ApplicationController
           end
         end
       end
-
+    
+    if params[:term]
+      @stocks = Stock.find(:all, :conditions => ["LOWER(stock_name) LIKE LOWER(?)", "%#{params[:term]}%"])
+    end
+      
     
     
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @stocks }
+      format.js  { render :json => @stocks.map {|p| {  :label => p.stock_name  , :value => p.id}} }
     end
   end
 
@@ -64,10 +77,12 @@ class StocksController < ApplicationController
   # GET /stocks/1.xml
   def show
     @stock = Stock.find(params[:id])
-    @title = "Stock : "+@stock.stock_name+" ("+@stock.ticker+' ) - Sector : '+@stock.sector.sector_name
+    @title = "Stock : "+@stock.stock_name.to_s+" ("+@stock.ticker.to_s+' )'
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @stock }
+      format.js  { render :json => @stock }
+      
     end
   end
 
@@ -85,7 +100,7 @@ class StocksController < ApplicationController
   # GET /stocks/1/edit
   def edit
     @stock = Stock.find(params[:id])
-    @title = "Stock : "+@stock.stock_name+" ("+@stock.ticker+' )'
+    @title = "Stock : "+@stock.try(:stock_name).to_s+" ("+@stock.try(:ticker).to_s+' )'
     
   end
 

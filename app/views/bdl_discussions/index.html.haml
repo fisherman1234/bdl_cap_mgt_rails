@@ -1,0 +1,16 @@
+%h1 BDL Discussions
+%table{:class=>'main-form'}
+  %tr
+    %thead
+      %th Discussion date
+      %th Stock
+      %th Stock price
+      %th Position BDL
+    %tbody
+      - @bdl_discussions.each do |bdl_discussion|
+        %tr
+          %td
+            %a{:href=>edit_bdl_discussion_path(bdl_discussion)}= bdl_discussion.discussion_date
+          %td= bdl_discussion.stock.try(:stock_name)
+          %td= bdl_discussion.stock_price
+          %td= bdl_discussion.position_bdl

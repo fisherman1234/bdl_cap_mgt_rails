@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  
+  before_filter :authenticate_user!
   def home_page
     if current_user
         redirect_to '/users/1'

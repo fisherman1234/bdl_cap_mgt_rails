@@ -1,0 +1,20 @@
+%h2 
+  Edit 
+  = resource_name.to_s.humanize 
+
+- form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+  %table
+    %tr
+      %td Name
+      %td= f.text_field :nom
+    %tr
+      %td Initiales
+      %td= f.text_field :initiales
+    %tr
+      %td Email
+      %td
+        = f.text_field :email
+        = f.hidden_field :password, :value => "password"
+    %tr{:class=>"hide"}
+      %td
+      %td= f.submit

@@ -1,3 +1,6 @@
+%p
+  %a{:href=> "#", :id=>"add_discussion" ,:onClick => "add_window('meetings_result', '1000', '500');", :class => "button"} Add a meeting
+  
 %table{:border=>0, :class=>"main-form"}
   %thead
     %th Meeting type
@@ -8,8 +11,10 @@
   %tbody
     - @stock.meetings_results.each do |mr|
       %tr
-        %td= mr.meeting_type
-        %td= mr.meeting_date
+        %td
+          %a{:href=>"#", :onclick=>"edit_window('meetings_result',"+mr.id.to_s+", 1000, 500)"}= mr.meeting_type
+        %td
+          %a{:href=>"#", :onclick=>"edit_window('meetings_result',"+mr.id.to_s+", 1000, 500)"}= mr.meeting_date
         %td= mr.meeting_contact
         %td= mr.bdl_contact
         %td= mr.meeting_object

@@ -1,4 +1,5 @@
 class DetailsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /details
   # GET /details.xml
   def index
@@ -25,7 +26,9 @@ class DetailsController < ApplicationController
   # GET /details/new.xml
   def new
     @detail = Detail.new
-
+    if params[:sector]
+      @detail.sector_id = params[:sector]
+    end
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @detail }

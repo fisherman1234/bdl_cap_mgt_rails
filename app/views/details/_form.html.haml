@@ -1,0 +1,24 @@
+%div#navbar
+  %ul
+    %li
+      
+      %a{:href=>"javascript:history.back()"} Back
+      %a{:href=>"/"} Home
+
+%div#page-content
+  - form_for(@detail) do |f|
+    %table{:class=>"main-form"}
+      %tr 
+        %td Sector
+        %td= select("detail", "sector_id", Sector.find(:all).collect {|u| [u.sector_name,u.id]}, {:include_blank => '==Choisir=='})
+      %tr
+        %td Title
+        %td= f.text_field :sector_analysis_title
+      %tr
+        %td 
+          Content
+          %a{:href=>"#", :onclick=>  'DisplayPopUpEditor("detail_sector_analysis_text", "detail[sector_analysis_text]");',:class => "button-edit"} Edit
+        %td= f.text_area :sector_analysis_text
+      %tr{:class=>'hide'}
+        %td
+        %td= f.submit

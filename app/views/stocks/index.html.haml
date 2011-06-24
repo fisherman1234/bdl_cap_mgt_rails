@@ -1,8 +1,10 @@
 %div#navbar
   %ul
     %li
-      %a{:href=>"#", :OnClick=>"history.go( -1 )"} Back
-    
+      
+      %a{:href=>"javascript:history.back()"} Back
+      %a{:href=>"/"} Home
+
 %div#page-content
   %p 
     Color code : 
@@ -28,7 +30,7 @@
           %td= stock.is_in_portfolio
           %td= stock.rating
           %td
-            %a{:href=>'/sectors/'+stock.sector_id.to_s}= stock.sector.sector_name
+            %a{:href=>'/sectors/'+stock.sector_id.to_s}= stock.sector.try(:sector_name)
           %td= stock.rating
           %td{:class => date_history(stock.flag_date)}= stock.flag_date
           %td= stock.user.try(:initiales)

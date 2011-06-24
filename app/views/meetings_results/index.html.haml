@@ -1,0 +1,21 @@
+%h1 Meetings index
+%table{:class=>"main-form"}
+  %thead
+    %th Stock
+    %th Meeting type
+    %th Meeting date
+    %th Meeting contact
+    %th BDL contact
+    %th Meeting object
+  %tbody
+    - @meetings_results.each do |meetings_result|
+      %tr
+        %td
+          %a{:href=>'/stocks/'+meetings_result.stock_id.to_s+'/edit'}= meetings_result.stock.try(:stock_name)
+        %td= meetings_result.meeting_type
+        %td
+          %a{:href=>edit_meetings_result_path(meetings_result)}= meetings_result.meeting_date
+        %td= meetings_result.meeting_contact
+        %td= meetings_result.user.try(:nom)
+        %td
+          %a{:href=>edit_meetings_result_path(meetings_result)}= meetings_result.meeting_object

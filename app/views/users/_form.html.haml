@@ -11,6 +11,7 @@
       %td
         = f.text_field :email
         = f.hidden_field :password, :value => "password"
-      
- 
-  = f.submit
+    %tr{:class=>"hide"}
+      %td
+      %td= f.submit
+    %input{:name => "commit", :type => "hidden",:value => "Create User"}

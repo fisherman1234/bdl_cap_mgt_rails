@@ -1,0 +1,46 @@
+%div#navbar
+  %ul
+    %li
+      
+      %a{:href=>"javascript:history.back()"} Back
+
+%div#page-content
+      
+  %div{:class=>"tabs"}
+    %ul
+      %li
+        %a{:href=> "#tabs-1"} Users
+      %li
+        %a{:href=> "#tabs-2"} Stocks
+      %li                                
+        %a{:href=> "#tabs-3"} Sectors
+
+
+  
+    %div#tabs-1
+      %a{:href=> "#", :id=>"add_user" ,:onClick => "add_user('user', '300', '300');", :class => "button"} Add a user
+    
+      %table{:class=>"main-form"}
+        %thead
+          %th Name
+          %th Email
+          %th Initiales
+        %tbody
+          - User.all.each do |user|
+            %tr
+              %td
+                %a{:href=>"#", :onClick=>"edit_user('user',"+user.id.to_s+", 300, 300)"}= user.nom
+              %td= user.email
+              %td= user.initiales
+  
+    %div#tabs-2
+      %a{:href=> "#", :id=>"add_stock" ,:onClick => "add_window('stock', '300', '300');", :class => "button"} Add a stock
+
+      %a{:href=> "#", :id=>"delete_stock" ,:onClick => "remove_stock();", :class => "button-minus"} Remove a stock
+    
+  
+    
+    %div#tabs-3
+      %a{:href=> "#", :id=>"add_sector" ,:onClick => "add_window('sector', '300', '300');", :class => "button"} Add a sector
+      %a{:href=> "#", :id=>"delete_sector" ,:onClick => "remove_sector();", :class => "button-minus"} Remove a sector
+    

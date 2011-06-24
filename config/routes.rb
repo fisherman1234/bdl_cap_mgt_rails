@@ -14,6 +14,22 @@ BdlCapitalManagement::Application.routes.draw do
   resources :contacts
 
   resources :bdl_discussions
+  
+  match 'settings', :to => 'settings#index' , :method => :get  
+  match 'settings/new_user', :to => 'settings#new_user' , :method => :post  
+  match 'settings/:id/update_user', :to => 'settings#update_user', :method => :post 
+  match 'settings/:id/destroy_user', :to => 'settings#destroy_user', :method => :post 
+  match 'settings/search', :to => 'settings#search' , :method => :get  
+  match '/up', :to => 'settings#up' , :method => :get  
+  match '/uploadFile', :to => 'settings#uploadFile' , :method => :get 
+  
+
+  match 'stocks/:id/destroy', :to => 'stocks#destroy', :method => :post 
+  match 'sectors/:id/destroy', :to => 'sectors#destroy', :method => :post 
+  match 'meetings_results/:id/destroy', :to => 'meetings_results#destroy', :method => :post 
+  match 'details/:id/destroy', :to => 'details#destroy', :method => :post 
+  match 'contacts/:id/destroy', :to => 'contacts#destroy', :method => :post 
+  match 'bdl_discussions/:id/destroy', :to => 'bdl_discussions#destroy', :method => :post 
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

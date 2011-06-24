@@ -19,7 +19,7 @@ test:
 
 production:
     adapter: mysql
-    database: bdl-capital-management-prod
+    database: Bdl_Capital_Management_V3
     username: root
-    password:
-    socket: /tmp/mysql.sock
+    password: root
+    socket: /Applications/MAMP/tmp/mysql/mysql.sock

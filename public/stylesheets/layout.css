@@ -6,9 +6,17 @@
 	width: 100%;
 }
 
+textarea{
+	width:100%;
+	height:300px;
+}
+
+.mceLayout {
+	width:100%; !important
+}
 .main-form-no-border textarea {
 	width: 95%;
-	height: 100px;
+	height: 300px;
 	font-size: 80%;
 }
 
@@ -35,7 +43,7 @@ input.clickable {
 
 .main-form textarea {
 	width: 95%;
-	height: 100px;
+	height: 300px;
 	font-size: 80%;
 }
 .main-form select {
@@ -157,4 +165,8 @@ input.clickable {
 }
 #activite_date_visite_5i{
 	width:auto;
+}
+#devise{
+	width : 50%; 
+	margin : auto;
 }

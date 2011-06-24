@@ -1,4 +1,6 @@
 class BdlDiscussionsController < ApplicationController
+  before_filter :authenticate_user!
+  
   # GET /bdl_discussions
   # GET /bdl_discussions.xml
   def index

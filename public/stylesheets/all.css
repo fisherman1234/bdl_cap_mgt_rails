@@ -26,6 +26,19 @@ html{
 	font-size:30px;
 }
 
+#footer{
+	margin-top:30px;
+	width:100%;
+	height:100px;
+	background-color:#024981;
+	color:white;
+}
+#footer a{
+	padding:20px;
+	color:white;
+	padding-top:70px;
+}
+
 #page-content{
 	padding:10px;
 	min-height:200px;
@@ -36,6 +49,21 @@ html{
 	text-align:left;
 }
 .main-form th{
+	border:1px black solid;
+	text-align:left;
+	
+}
+
+.main-form-no-margin{
+	border-collapse:collapse;
+	width:100%;
+}
+
+.main-form-no-margin td{
+	border:1px black solid;
+	text-align:left;
+}
+.main-form-no-margin th{
 	border:1px black solid;
 	text-align:left;
 	
@@ -94,3 +122,7 @@ html{
 	text-decoration: none;
 }
 
+#login{
+	text-align:left;
+	padding:20px;
+}

@@ -7,13 +7,15 @@ gem 'rake', '0.9.2'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 
-gem "nested_form", :git => "git://github.com/madebydna/nested_form.git"
 gem "prawn"
 gem 'haml'
 gem 'devise'
 gem "hirb"
 gem 'ruby-mysql', '2.9.3'
-
+gem 'thin'
+gem 'delocalize'
+gem "spreadsheet"
+gem 'ruby-debug19'
 
 # Use unicorn as the web server
 # gem 'unicorn'

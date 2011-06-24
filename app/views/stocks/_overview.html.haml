@@ -1,4 +1,5 @@
 %table{:border=>0, :style=>"width:100%"}
+  
   %tr
     %td
       %table
@@ -14,14 +15,18 @@
             %td= f.check_box :flagged
           %tr
             %td Flag date
-            %td= f.text_field :flag_date, :class => "date_picker"
+            %td= f.text_field :flag_date, :class => "datepicker"
           %tr
             %td
             %td= f.submit
     %td
       %h3 Available analysis
-      %table
-        %tr Analysis list
+      %ul
+        - @stock.sector.details.each do |detail|
+          %li
+            %a{:href=>'/details/'+detail.id.to_s+'/edit'}= detail.sector_analysis_title
+      %p
+        %a{:href=> "#", :id=>"add_detail" ,:onClick => "add_window('detail', '1000', '500');", :class => "button"} Add an analysis
   %tr
     %td
       - form_for(@stock) do |f| 
@@ -62,11 +67,13 @@
             %td= f.submit
   %tr
     %td{:colspan=>2}
-      %table{:width=>'100%', :class => "main-form-no-border"}
-        - form_for(@stock) do |f|
+      - form_for(@stock) do |f|      
+        %table{:width=>'100%', :class => "main-form-no-border"}
           %tr
             %td{:colspan=>2,:style=>'width:100%'}= f.text_area :investment_case
           %tr
-            %td{:colspan=>2,:style=>'width:100%'}= f.submit
+            %td{:colspan=>2,:style=>'width:100%'}
+              %a{:href=>"#", :onclick=>  'DisplayPopUpEditor("stock_investment_case", "stock[investment_case]");',:class => "button-edit"} Edit
+              = f.submit
   
   
