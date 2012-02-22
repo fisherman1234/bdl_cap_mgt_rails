@@ -9,7 +9,7 @@
       %form{:method=>"get", "action"=>"/settings/search"}
         %input{:id=>'full_text_search', :name=>"query"}
         
-        %input{:id=>'submit', :type=>:submit} 
+        %input{:id=>'submit', :type=>:submit, :value=>"Search"} 
       
     %td
       %table{:style=>"width:100%"}
@@ -28,19 +28,20 @@
                     %td
                       %a{:href=>'/stocks/'+stock.id.to_s+'/edit'}= stock.stock_name
                     %td= stock.rating
-        %tr
-          %td 
-            %a{:href => '/stocks?type=my_stocks'} My stocks
-            &nbsp;//
-            %a{:href => '/stocks?type=my_flagged_stocks'} My flagged stocks
+
         %tr
           %td
             %h3 Queries
-        %tr
-          %td
             %ul
               %li
-                %a{:href => '/stocks?type=portfolio'} Portfolio
+                %a{:href => '/stocks?type=my_stocks'} My stocks
+                &nbsp;//
+                %a{:href => '/stocks?type=my_flagged_stocks'} My flagged stocks
+              %li
+                Portfolio
+                %a{:href => '/stocks?type=portfolio'} Yes
+                &nbsp;//
+                %a{:href => '/stocks?type=not_in_portfolio'} No
               %li
                 Flagged stocks : 
                 %a{:href => '/stocks?type=flagged'} Yes
@@ -63,7 +64,7 @@
               %li
                 %a{:href => '/contacts'} Contact list
               %li
-                %a{:href => '/details'} Studies
+                %a{:href => '/details'} Analysis
   %tr
     %td{:colspan=>2}
       %h3 Upcoming stocks
@@ -80,7 +81,10 @@
               %tr
                 %td
                   %a{:href=>'/stocks/'+stock.id.to_s+'/edit'}= stock.stock_name
-                %td{:class => date_history(stock.flag_date)}= stock.flag_date
+                -if stock.flag_date
+                  %td{:class => date_history(stock.flag_date)}= stock.flag_date.strftime("%d/%m/%Y")
+                -else
+                  %td
                 %td
                   %a{:href=>'/sectors/'+stock.sector_id.to_s}= stock.sector.sector_name
                 
@@ -94,4 +98,10 @@
     %a{:href=>'/users/sign_out'} Sign out 
     &nbsp;//
     %a{:href=>'/settings'} Administration
+    
+-if @stocks_today && !@stocks_today.empty?    
+  :javascript
+    window.open ('/stocks_of_the_day', 'Stocks of the day', config='height=100, width=400, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no')
+
+
     

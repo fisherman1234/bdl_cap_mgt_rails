@@ -1,5 +1,4 @@
 class SettingsController < ApplicationController
-  before_filter :authenticate_user!
   def index
     @title= "Settings"
   end
@@ -64,16 +63,26 @@ class SettingsController < ApplicationController
   end
   
   def uploadFile
-    
-    name =  params['datafile'].original_filename
-    name = File.basename(name)
-    name.sub(/[^\w\.\-]/,'_')
-    
-    directory = "public/data"
-    # create the file path
-    path = File.join(directory, name)
-    # write the file
-    File.open(path, "wb") { |f| f.write(params['datafile'].read) }
+    params.each do |param|
+      puts "---------------------------------"
+      begin
+        puts param[1].original_filename
+        puts param[1].tempfile
+        if param[1].original_filename
+          name =  param[1].original_filename
+          name = File.basename(name)
+          name.sub(/[^\w\.\-]/,'_')
+
+          directory = "public/upload"
+          # create the file path
+          path = File.join(directory, name)
+          # write the file
+          File.open(path, "wb") { |f| f.write(param[1].tempfile.read) }
+        end
+      rescue
+        puts 'not a file'
+      end
+    end
     
     render :text => "File has been uploaded successfully"
     

@@ -1,0 +1,10 @@
+#!/bin/sh 
+sleep 2 
+echo "stop de thin. Pause de 60 secondes pour suppression des connexions" 
+/etc/init.d/thin stop
+sleep 60
+echo "demarrage de thin"
+/etc/init.d/thin start
+/etc/init.d/nginx stop
+sleep 10
+/etc/init.d/nginx start

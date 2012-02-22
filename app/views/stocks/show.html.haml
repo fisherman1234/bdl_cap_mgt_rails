@@ -4,117 +4,136 @@
       
       %a{:href=>"javascript:history.back()"} Back
       %a{:href=>"/"} Home
+      %a{:href=>"/stocks/"+@stock.id.to_s+"/to_pdf"} To pdf
+      %a{:href=>"#", :onClick => "window.print();"} Print
 
 %div#page-content
-  %h3 Stock
-  %table{:class=>"main-form"}
-    %tr
-      %td Name
-      %td= @stock.stock_name
-    %tr
-      %td Sector
-      %td= @stock.sector.try(:sector_name)
-    %tr
-      %td Rating
-      %td= @stock.rating
-    %tr
-      %td Flagged
-      %td= @stock.flagged
-    %tr
-      %td Flagge date
-      %td= @stock.flag_date
-    %tr
-      %td In portfolio
-      %td= @stock.is_in_portfolio
-    
-    %tr
-      %td In charge
-      %td= @stock.in_charge.try(:nom)
-    %tr
-      %td Environment
-      %td= sanitize(@stock.environment)
-    
-    %tr
-      %td Business description
-      %td= sanitize(@stock.business_description)
-    %tr
-      %td Competition
-      %td= sanitize(@stock.competition)
-    
-    %tr
-      %td Management
-      %td= sanitize(@stock.management)
-    %tr
-      %td Valorisation
-      %td= sanitize(@stock.valorisation)
-
-    %tr
-      %td Investment case
-      %td= sanitize(@stock.investment_case)
-    %tr
-      %td Investment risk macro
-      %td= sanitize(@stock.investment_risks_macro)   
-    %tr
-      %td Investment risk micro
-      %td= sanitize(@stock.investment_risks_micro)
+  %a{:href=>"#", :onclick=>"$('#stock-div').toggle()"} Show/Hide stock
+  %div#stock-div
+    %h3 Stock
+    %table{:class=>"main-form"}
+      %tr
+        %td Name
+        %td= @stock.stock_name
+      %tr
+        %td Sector
+        %td= @stock.sector.try(:sector_name)
+      %tr
+        %td Rating
+        %td= @stock.rating
+      %tr
+        %td Flagged
+        %td= @stock.flagged
+      %tr
+        %td Flagge date
+        %td= @stock.flag_date
+      %tr
+        %td Flag comment
+        %td= @stock.flag_comment
+      %tr
+        %td In portfolio
+        %td= @stock.is_in_portfolio
+      
+      %tr
+        %td In charge
+        %td= @stock.in_charge.try(:nom)
+      %tr
+        %td 
+          Environment
+          %a{:href=>"#", :onclick => "$('#environment-section').toggle()"} Show/Hide
+        %td
+          %div#environment-section= sanitize(@stock.environment)
+      
+      %tr
+        %td 
+          Business description
+          %a{:href=>"#", :onclick => "$('#environment-businessdesc').toggle()"} Show/Hide
+        %td
+          %div#environment-businessdesc= sanitize(@stock.business_description)
+      %tr
+        %td Competition
+        %td= sanitize(@stock.competition)
+      
+      %tr
+        %td Management
+        %td= sanitize(@stock.management)
+      %tr
+        %td Valorisation
+        %td= sanitize(@stock.valorisation)
+  
+      %tr
+        %td Investment case
+        %td= sanitize(@stock.investment_case)
+      %tr
+        %td Investment risk macro
+        %td= sanitize(@stock.investment_risks_macro)   
+      %tr
+        %td Investment risk micro
+        %td= sanitize(@stock.investment_risks_micro)
  
-  %h3 Contacts
-  %table{:border=>0, :class=>"main-form"}
-    %thead
-      %th Job title
-      %th Name
-      %th Position
-      %th Email
-      %th Téléphone
-    %tbody
-      - @stock.contacts.each do |mr|
-        %tr
-          %td= mr.job_title
-          %td
-            %a{:href=>"#", :onclick=>"edit_window('contact',"+mr.id.to_s+", 1000, 300)"}= mr.name
-          %td= mr.title
-          %td= mr.email
-          %td= mr.telephone
+  %a{:href=>"#", :onclick=>"$('#contact-section').toggle()"} Show/Hide contacts
 
-  %h3 BDL Discussions
-  - @stock.bdl_discussions.each do |discussion|
+  %div#contact-section
+    %h3 Contacts
     %table{:border=>0, :class=>"main-form"}
-      %tr
-        %td{:width=>"20%"} Date
-        %td= discussion.discussion_date
-      %tr
-        %td BDL Position
-        %td= discussion.position_bdl
-      %tr
-        %td Stock price
-        %td= discussion.stock_price
-      %tr
-        %td BDL View
-        %td= sanitize (discussion.view_bdl)
+      %thead
+        %th Job title
+        %th Name
+        %th Position
+        %th Email
+        %th Phone
+      %tbody
+        - @stock.contacts.each do |mr|
+          %tr
+            %td= mr.job_title
+            %td
+              %a{:href=>"#", :onclick=>"edit_window('contact',"+mr.id.to_s+", 1000, 300)"}= mr.name
+            %td= mr.title
+            %td= mr.email
+            %td= mr.telephone
+
+  %a{:href=>"#", :onclick=>"$('#discussions-section').toggle()"} Show/Hide discussions
+  %div#discussions-section
+    %h3 BDL Discussions
+    - @stock.bdl_discussions.sort_by {|a| a.send(:discussion_date) || Date.new(2000,01,01)}.reverse.each do |discussion|
+      %table{:border=>0, :class=>"main-form"}
+        %tr
+          %td{:width=>"20%"} Date
+          %td= discussion.discussion_date
+        %tr
+          %td BDL Position
+          %td= discussion.position_bdl
+        %tr
+          %td Stock price
+          %td= discussion.stock_price
+        %tr
+          %td BDL View
+          %td= sanitize (discussion.view_bdl)
       
-      
-  %h3 Meetings results
-  - @stock.meetings_results.each do |discussion|
-    %table{:border=>0, :class=>"main-form"}
-      %tr
-        %td{:width=>"20%"} Type
-        %td= discussion.meeting_type
-      %tr
-        %td Date
-        %td= discussion.meeting_date
-      %tr
-        %td Contact
-        %td= discussion.meeting_contact
-      %tr
-        %td BDL Contact
-        %td= discussion.user.try(:nom)
-        
-      %tr
-        %td Subject
-        %td= sanitize (discussion.meeting_object)
-      %tr
-        %td Note
-        %td= sanitize (discussion.meeting_notes)
-      %tr
-        %td Conclusion
-        %td= sanitize(discussion.meeting_conclusions)
+  %a{:href=>"#", :onclick=>"$('#meetings-section').toggle()"} Show/Hide meetings
+  %div#meetings-section
+    %h3 Meetings results
+    - @stock.meetings_results.sort_by {|a| a.send(:meeting_date) || Date.new(2000,01,01)}.reverse.each do |discussion|
+      %table{:border=>0, :class=>"main-form"}
+        %tr
+          %td{:width=>"20%"} Type
+          %td= discussion.meeting_type
+        %tr
+          %td Date
+          %td= discussion.meeting_date
+        %tr
+          %td Contact
+          %td= discussion.meeting_contact
+        %tr
+          %td BDL Contact
+          %td= discussion.user.try(:nom)
+          
+        %tr
+          %td Subject
+          %td= sanitize (discussion.meeting_object)
+        %tr
+          %td Note
+          %td= sanitize (discussion.meeting_notes)
+        %tr
+          %td Conclusion
+          %td= sanitize(discussion.meeting_conclusions)

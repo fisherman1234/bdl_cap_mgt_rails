@@ -17,14 +17,18 @@
             %td Flag date
             %td= f.text_field :flag_date, :class => "datepicker"
           %tr
-            %td
-            %td= f.submit
+            %td Flag comment
+            %td= f.text_field :flag_comment
+  
+          %tr
+            
     %td
       %h3 Available analysis
       %ul
-        - @stock.sector.details.each do |detail|
-          %li
-            %a{:href=>'/details/'+detail.id.to_s+'/edit'}= detail.sector_analysis_title
+        - if @stock.sector
+          - @stock.sector.details.sort_by! { |a| [ a.sector_analysis_title || '' ]}.each do |detail|
+            %li
+              %a{:href=>'/details/'+detail.id.to_s+'/edit'}= detail.sector_analysis_title
       %p
         %a{:href=> "#", :id=>"add_detail" ,:onClick => "add_window('detail', '1000', '500');", :class => "button"} Add an analysis
   %tr
@@ -43,8 +47,7 @@
             %td Ticker
             %td= f.text_field :ticker
           %tr
-            %td
-            %td= f.submit
+            
     %td
       %table
         - form_for(@stock) do |f| 
@@ -63,17 +66,18 @@
               = radio_button("stock", "rating", "Bad business")
               Bad business
           %tr
-            %td
-            %td= f.submit
+            
   %tr
     %td{:colspan=>2}
       - form_for(@stock) do |f|      
-        %table{:width=>'100%', :class => "main-form-no-border"}
+        %table
           %tr
-            %td{:colspan=>2,:style=>'width:100%'}= f.text_area :investment_case
+            %td
+              %h3 Investment case
+          %tr
+            %td{:colspan=>2,:style=>'min-width:800px'}= f.text_area :investment_case
           %tr
             %td{:colspan=>2,:style=>'width:100%'}
               %a{:href=>"#", :onclick=>  'DisplayPopUpEditor("stock_investment_case", "stock[investment_case]");',:class => "button-edit"} Edit
-              = f.submit
   
   

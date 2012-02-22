@@ -13,16 +13,17 @@
         %td Date
         %td= f.text_field :discussion_date, :class=>"datepicker"
       %tr
-        %td 
-          BDL View
-          %a{:href=>"#", :onclick=>  'DisplayPopUpEditor("bdl_discussion_view_bdl", "bdl_discussion[view_bdl]");',:class => "button-edit"} Edit
-        %td= f.text_area :view_bdl
-      %tr
         %td Stock price
         %td= f.text_field :stock_price
       %tr
         %td BDL Position
         %td= f.select :position_bdl, ["Neutral","Long","Short"]
+      %tr
+        %td 
+          BDL View
+          %a{:href=>"#", :onclick=>  'DisplayPopUpEditor("bdl_discussion_view_bdl", "bdl_discussion[view_bdl]");',:class => "button-edit"} Edit
+        %td= f.text_area :view_bdl
+
       %tr{:class=>"hide"}
         %td
         %td= f.submit

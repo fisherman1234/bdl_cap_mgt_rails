@@ -7,15 +7,20 @@ gem 'rake', '0.9.2'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 
-gem "prawn"
 gem 'haml'
 gem 'devise'
 gem "hirb"
-gem 'ruby-mysql', '2.9.3'
+#gem 'ruby-mysql', '2.9.3'
 gem 'thin'
 gem 'delocalize'
-gem "spreadsheet"
-gem 'ruby-debug19'
+
+#gem 'mysql', '2.8.1', :path => "/var/www"
+#gem 'mysql2', '0.2.7', :path => "/var/www"
+gem 'mysql'
+gem 'mysql2'
+
+gem 'pdfkit', '0.5.1'
+gem 'wkhtmltopdf-binary'
 
 # Use unicorn as the web server
 # gem 'unicorn'

@@ -3,17 +3,18 @@
   = @stock.sector.try(:sector_name)
   %input{:type=> "hidden", :value => @stock.id, :id=>"stock_id"}
   %input{:type=> "hidden", :value => @stock.sector_id, :id=>"sector_id"}
+  
 
 %div{:class=>"tabs"}
   %ul
     %li
       %a{:href=> "#tabs-1"} Overview
     %li
-      %a{:href=> "#tabs-2"} Analysis
+      %a{:href=> "#tabs-2"} Stock Analysis
     %li                                
       %a{:href=> "#tabs-4"} BDL view
     %li                                
-      %a{:href=> "#tabs-6"} Meetings results
+      %a{:href=> "#tabs-6"} Company meetings
     %li                                
       %a{:href=> "#tabs-5"} Contacts
 

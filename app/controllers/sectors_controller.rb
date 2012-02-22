@@ -1,5 +1,5 @@
 class SectorsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:create, :destroy, :new, :update]
   # GET /sectors
   # GET /sectors.xml
   def index

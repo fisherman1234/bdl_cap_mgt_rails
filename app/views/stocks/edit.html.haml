@@ -4,8 +4,8 @@
       
       %a{:href=>"javascript:history.back()"} Back
       %a{:href=>"/"} Home
-      %a{:href=>"#"} Print
-    
+      %a{:href=>"/stocks/"+@stock.id.to_s} Print
+      %a{:href=>"javascript:saveForms()"} Enregistrer tout
+      
 %div#page-content
   = render 'form'
-

@@ -8,12 +8,13 @@ function primary_formatting(){
 	$(".phone").mask("+99.9.99.99.99.99");
 	$("input").addClass("ui-widget-content ui-corner-all");
 	$("textarea").addClass("ui-widget-content ui-corner-all");
+	$(":submit").css("background","#F3E2A9");
 	
 	$( ".datepicker" ).datepicker();
 	
 	$(':input').change(function(){
-		$(this).parents('form:first').addClass('dirty-form active-form')
-		$(this).addClass('dirty-input')
+		$(this).parents('form:first').addClass('dirty-form active-form');
+		$(this).addClass('dirty-input');
 		}
 	);
 	
@@ -33,8 +34,10 @@ function primary_formatting(){
 				window.location.href= '/sectors/'+ui.item.value;
 					}
 	});
+	processTextAreas();
+
 	
 
 }
 
-primary_formatting()
+primary_formatting();

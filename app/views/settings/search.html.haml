@@ -100,10 +100,9 @@
       %br
       %a{:href=>"/details/"+detail.id.to_s+'/edit'}
         %table{:class=>"main-form-no-margin"}
-          -if excerpt(strip_tags(detail.sector_analysis_title), @query)
-            %tr
-              %td{:width=>"20%"} Title : 
-              %td= highlight(excerpt(strip_tags(detail.sector_analysis_title), @query),@query)
+          %tr
+            %td{:width=>"20%"} Title : 
+            %td= highlight(strip_tags(detail.sector_analysis_title), @query)
           -if excerpt(strip_tags(detail.sector_analysis_text), @query)
             %tr
               %td{:width=>"20%"} Content : 

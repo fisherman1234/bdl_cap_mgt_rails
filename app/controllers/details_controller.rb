@@ -1,10 +1,10 @@
 class DetailsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:create, :destroy, :new, :update]
   # GET /details
   # GET /details.xml
   def index
-    @details = Detail.all
-
+    @details = Detail.all(:order => 'sector_id, sector_analysis_title, DATE(updated_at)')
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @details }
@@ -61,6 +61,7 @@ class DetailsController < ApplicationController
   def update
     @detail = Detail.find(params[:id])
 
+
     respond_to do |format|
       if @detail.update_attributes(params[:detail])
         format.html { redirect_to(@detail, :notice => 'Detail was successfully updated.') }
@@ -82,5 +83,13 @@ class DetailsController < ApplicationController
       format.html { redirect_to(details_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  def to_pdf
+  	filename = 'localhost/details/'+params[:id].to_s
+    outname = File.join(RAILS_ROOT, 'public','tmp', 'test.pdf')
+    %x[wkhtmltopdf #{filename} #{outname}]
+    send_file(outname, :type => 'application/pdf', :disposition => 'inline')
+    return # to avoid double render call
   end
 end

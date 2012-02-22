@@ -1,5 +1,6 @@
+# encoding: utf-8
 class StocksController < ApplicationController
-  before_filter :authenticate_user!
+
   # GET /stocks
   # GET /stocks.xml
   def index
@@ -23,7 +24,9 @@ class StocksController < ApplicationController
         when 'neutral'
           @title = "Rating : Neutral"
           @stocks = Stock.where(:rating=>'Neutral')
-
+        when 'not_in_portfolio'
+          @title = "Stocks not included in portfolio"
+          @stocks = Stock.find(:all, :conditions => ["is_in_portfolio = 0 OR is_in_portfolio = ''"])
         when 'my_stocks'
           @title = "My stocks"
           @stocks = current_user.stocks
@@ -38,7 +41,7 @@ class StocksController < ApplicationController
           @title = "Position : Neutral"
           Stock.find(:all).each do |stock|
             if stock.last_position == 'Neutral'
-              puts 'yo !'
+              @stocks.push(stock)
             end
           end
         when 'poslong'
@@ -53,7 +56,7 @@ class StocksController < ApplicationController
           @stocks = []
           @title = "Position : Short"
           Stock.all.each do |stock|
-            if stock.last_position == 'Normal'
+            if stock.last_position == 'Short'
               @stocks.push(stock)
             end
           end
@@ -79,9 +82,10 @@ class StocksController < ApplicationController
     @stock = Stock.find(params[:id])
     @title = "Stock : "+@stock.stock_name.to_s+" ("+@stock.ticker.to_s+' )'
     respond_to do |format|
-      format.html # show.html.erb
+      format.html {render :layout => 'light'} # show.html.erb
       format.xml  { render :xml => @stock }
       format.js  { render :json => @stock }
+
       
     end
   end
@@ -101,14 +105,16 @@ class StocksController < ApplicationController
   def edit
     @stock = Stock.find(params[:id])
     @title = "Stock : "+@stock.try(:stock_name).to_s+" ("+@stock.try(:ticker).to_s+' )'
-    
+
   end
 
   # POST /stocks
   # POST /stocks.xml
   def create
     @stock = Stock.new(params[:stock])
-
+    if params[:stock][:flag_date] 
+    	params[:stock][:flag_date] = DateTime.strptime(params[:stock][:flag_date], "%d/%m/%Y").strftime("%Y-%m-%d")
+	end
     respond_to do |format|
       if @stock.save
         format.html { redirect_to [:edit, @stock] }
@@ -124,6 +130,10 @@ class StocksController < ApplicationController
   # PUT /stocks/1.xml
   def update
     @stock = Stock.find(params[:id])
+    
+	if params[:stock][:flag_date] && !params[:stock][:flag_date].empty?
+    	params[:stock][:flag_date] = DateTime.strptime(params[:stock][:flag_date], "%d/%m/%Y").strftime("%Y-%m-%d")
+	end
 
     respond_to do |format|
       if @stock.update_attributes(params[:stock])
@@ -146,5 +156,16 @@ class StocksController < ApplicationController
       format.html { redirect_to(stocks_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  def to_pdf
+  	filename = 'localhost/stocks/'+params[:id].to_s
+    outname = File.join(RAILS_ROOT, 'public','tmp', 'out.pdf')
+    
+
+
+    %x[wkhtmltopdf #{filename} #{outname}]
+    send_file(outname, :type => 'application/pdf', :disposition => 'inline')
+    return # to avoid double render call
   end
 end

@@ -1,0 +1,11 @@
+%div#navbar
+  %ul
+    %li
+      
+      %a{:href=>"javascript:history.back()"} Back
+      %a{:href=>"/"} Home
+      %a{:href=>"#", :onClick => "window.print();"} Print
+
+%div#page-content
+  %h3= @detail.sector_analysis_title
+  %div#desc= sanitize(@detail.sector_analysis_text)

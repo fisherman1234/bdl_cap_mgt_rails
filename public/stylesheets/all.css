@@ -9,21 +9,20 @@
 }
 
 html{
-	width:90%;
-	margin-left:4%;
 	background-color:black; !important
 	padding:10px;
 }
 #header{
 	width:100%;
-	height:100px;
+	min-height:100px;
 	background-color:#024981;
 	color:white;
 }
 #header h1{
 	padding:20px;
-	padding-top:40px;
+	padding-top:35px;
 	font-size:30px;
+	line-height:35px;
 }
 
 #footer{
@@ -44,13 +43,38 @@ html{
 	min-height:200px;
 }
 
+#page-content-show{
+	padding:10px;
+	min-height:200px;
+}
+
+
+.main-form{
+	margin-top:30px;
+	border:2px black solid;
+	border-collapse:collapse;
+	overflow: hidden;
+}
+
+/* Firefox */
+@-moz-document url-prefix()
+{
+  .main-form{
+  	margin-top:30px;
+  	border:1px black solid;
+  	border-collapse:collapse;
+  	overflow: hidden;
+  }}
+
 .main-form td{
 	border:1px black solid;
 	text-align:left;
+	overflow: hidden;
 }
 .main-form th{
 	border:1px black solid;
 	text-align:left;
+	overflow: hidden;
 	
 }
 
@@ -69,10 +93,7 @@ html{
 	
 }
 
-.main-form{
-	margin-top:30px;
-	border-collapse:collapse;;
-}
+
 
 #navbar{
 	width:100%;

@@ -1,0 +1,15 @@
+/usr/bin/ruby extconf.rb 
+checking for rb_trap_immediate in ruby.h,rubysig.h... yes
+checking for rb_thread_blocking_region()... no
+checking for inotify_init() in sys/inotify.h... yes
+checking for writev() in sys/uio.h... yes
+checking for rb_thread_check_ints()... no
+checking for rb_time_new()... yes
+checking for sys/event.h... no
+checking for epoll_create() in sys/epoll.h... yes
+creating Makefile
+
+make
+g++ -I. -I. -I/usr/lib/ruby/1.8/i386-linux -I. -DBUILD_FOR_RUBY -DHAVE_RB_TRAP_IMMEDIATE -DHAVE_RBTRAP -DHAVE_INOTIFY_INIT -DHAVE_INOTIFY -DHAVE_WRITEV -DHAVE_WRITEV -DHAVE_RB_TIME_NEW -DOS_UNIX -DHAVE_EPOLL_CREATE -DHAVE_EPOLL -DWITH_SSL  -D_FILE_OFFSET_BITS=64  -fPIC -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -m32 -march=i686 -mtune=atom -fasynchronous-unwind-tables -fno-strict-aliasing  -fPIC      -c sigs.cpp
+make: g++: Command not found
+make: *** [sigs.o] Error 127

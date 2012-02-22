@@ -9,10 +9,11 @@
     %th Stock price
     %th BDL Position
   %tbody
-    - @stock.bdl_discussions.each do |discussion|
+    - @stock.bdl_discussions.sort_by {|a| a.send(:discussion_date) || Date.new(2000,01,01)}.reverse.each do |discussion|
       %tr
         %td
           %a{:href=>"#", :onclick=>"edit_window('bdl_discussion',"+discussion.id.to_s+", 1000, 500)"}= discussion.discussion_date
         %td= truncate(strip_tags(discussion.view_bdl), options = {:length=>50})
         %td= discussion.stock_price
-        %td= discussion.position_bdl
+        %td
+          %a{:href=>"#", :onclick=>"edit_window('bdl_discussion',"+discussion.id.to_s+", 1000, 500)"}= discussion.position_bdl

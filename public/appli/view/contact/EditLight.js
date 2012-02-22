@@ -1,0 +1,100 @@
+Ext.define('TP.view.contact.EditLight', {
+    extend: 'Ext.panel.Panel',
+    alias: 'widget.contactEditLight',
+    layout: 'fit',
+    id: "contactEditLight",
+    initComponent: function() {
+        this.items = [{
+            xtype: 'form',
+            layout: 'anchor',
+						title: 'Informations contact',
+            items: [{
+                xtype: 'container',
+                padding: 10,
+                layout: 'anchor',
+                items: [
+                {
+                    xtype: 'textfield',
+                    fieldLabel: 'Nom',
+                    name: 'nom',
+                    anchor: '100%'
+
+                },
+                {
+                    xtype: 'textfield',
+                    fieldLabel: 'Prénom',
+                    name: 'prenom',
+                    anchor: '100%'
+
+                },
+                {
+                    xtype: 'container',
+                    layout: 'hbox',
+
+                    items: [{
+                        xtype: 'combo',
+                        fieldLabel: "Société",
+                        forceSelection: true,
+                        anchor: '96%',
+                        name: 'institution_id',
+                        store: 'TP.store.Institutions',
+                        displayField: 'nom',
+                        valueField: 'id',
+                        hiddenName: 'institution_id',
+                        queryMode: 'local',
+                        flex: 1
+                    },
+                    {
+                        xtype: "button",
+                        margin: '0 0 0 4',
+                        action: 'add_institution',
+                        icon: '/images/building_add.png'
+                    }]
+                },
+                {
+                    xtype: 'textfield',
+                    fieldLabel: 'Téléphone fixe',
+                    anchor: '100%',
+                    name: 'telephone',
+                    maskRe: /[0-9 -+.]/,
+                    emptyText: 'ex. +33.6.72.66.41.90'
+                },
+                {
+                    xtype: 'textfield',
+                    fieldLabel: 'Téléphone portable',
+                    anchor: '100%',
+                    name: 'portable',
+                    maskRe: /[0-9 -+.]/,
+                    emptyText: 'ex. +33.6.72.66.41.90'
+                },
+								{
+                    xtype: 'textfield',
+                    fieldLabel: 'Fax',
+                    anchor: '100%',
+                    name: 'fax',
+                    maskRe: /[0-9 -+.]/,
+                    emptyText: 'ex. +33.6.72.66.41.90'
+                },
+                {
+                    xtype: 'textfield',
+                    fieldLabel: 'Email',
+                    anchor: '100%',
+                    name: 'email'
+                }]
+            }]
+        }];
+        this.buttons = [{
+            text: 'Plus',
+            action: 'more',
+						icon: "/images/user_edit.png"
+        },{
+            text: 'Enregistrer',
+            action: 'save',
+						icon: "/images/disk.png"
+
+        }
+				];
+
+        this.callParent(arguments);
+    }
+});

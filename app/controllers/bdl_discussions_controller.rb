@@ -1,5 +1,5 @@
 class BdlDiscussionsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:create, :destroy, :new, :update]
   
   # GET /bdl_discussions
   # GET /bdl_discussions.xml
@@ -44,8 +44,12 @@ class BdlDiscussionsController < ApplicationController
   # POST /bdl_discussions
   # POST /bdl_discussions.xml
   def create
-    @bdl_discussion = BdlDiscussion.new(params[:bdl_discussion])
+  	if params[:bdl_discussion][:discussion_date] && !params[:bdl_discussion][:discussion_date].empty?
+    	params[:bdl_discussion][:discussion_date] = DateTime.strptime(params[:bdl_discussion][:discussion_date], "%d/%m/%Y").strftime("%Y-%m-%d")
+    end
 
+    @bdl_discussion = BdlDiscussion.new(params[:bdl_discussion])
+	
     respond_to do |format|
       if @bdl_discussion.save
         format.html { redirect_to(@bdl_discussion, :notice => 'Bdl discussion was successfully created.') }
@@ -60,7 +64,10 @@ class BdlDiscussionsController < ApplicationController
   # PUT /bdl_discussions/1
   # PUT /bdl_discussions/1.xml
   def update
-    @bdl_discussion = BdlDiscussion.find(params[:id])
+    @bdl_discussion = BdlDiscussion.find(params[:id]) 
+    if params[:bdl_discussion][:discussion_date] && !params[:bdl_discussion][:discussion_date].empty?
+   		params[:bdl_discussion][:discussion_date] = DateTime.strptime(params[:bdl_discussion][:discussion_date], "%d/%m/%Y").strftime("%Y-%m-%d")
+	end
 
     respond_to do |format|
       if @bdl_discussion.update_attributes(params[:bdl_discussion])

@@ -8,7 +8,7 @@
     %th BDL contact
     %th Meeting object
   %tbody
-    - @meetings_results.each do |meetings_result|
+    - @meetings_results.sort_by {|a| a.send(:meeting_date) || Date.new(2000,01,01)}.reverse.each do |meetings_result|
       %tr
         %td
           %a{:href=>'/stocks/'+meetings_result.stock_id.to_s+'/edit'}= meetings_result.stock.try(:stock_name)

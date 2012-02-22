@@ -1,9 +1,9 @@
 %div{:class=>"tabs"}
   %ul
     %li
-      %a{:href=> "#tabs-11"} Investment risks
-    %li
       %a{:href=> "#tabs-12"} Business description
+    %li
+      %a{:href=> "#tabs-11"} Investment risks
     %li
       %a{:href=> "#tabs-13"} Competition
     %li                                
@@ -18,15 +18,13 @@
             %h3 Investment risks macro
             
             %a{:href=>"#", :onclick=>  'DisplayPopUpEditor("stock_investment_risks_macro", "stock[investment_risks_macro]");',:class => "button-edit"} Edit
-            = f.submit
           %td{:width=>'80%'}
             %div{:style=>"width=>100%"}
             = f.text_area :investment_risks_macro
         %tr
           %td
             %h3 Investment risks micro
-            %a{:href=>"#", :onclick=>  'DisplayPopUpEditor("stock_investment_risks_macro", "stock[investment_risks_macro]");',:class => "button-edit"} Edit
-            = f.submit
+            %a{:href=>"#", :onclick=>  'DisplayPopUpEditor("stock_investment_risks_micro", "stock[investment_risks_micro]");',:class => "button-edit"} Edit
           %td
             = f.text_area :investment_risks_micro
             
@@ -39,7 +37,6 @@
           %td{:width=>'20%'}
             %h3 Business description
             %a{:href=>"#", :onclick=>  'DisplayPopUpEditor("stock_business_description", "stock[business_description]");',:class => "button-edit"} Edit
-            = f.submit
           %td
             = f.text_area :business_description
             
@@ -52,7 +49,6 @@
           %td{:width=>'20%'}
             %h3 Competition
             %a{:href=>"#", :onclick=>  'DisplayPopUpEditor("stock_competition", "stock[competition]");',:class => "button-edit"} Edit
-            = f.submit
           %td
             = f.text_area :competition
     
@@ -65,7 +61,6 @@
           %td{:width=>'20%'}
             %h3 Management
             %a{:href=>"#", :onclick=>  'DisplayPopUpEditor("stock_management", "stock[management]");',:class => "button-edit"} Edit
-            = f.submit
           %td
             = f.text_area :management
     

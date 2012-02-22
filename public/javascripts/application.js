@@ -14,9 +14,11 @@ function add_window(item_name, width, height){
 	console.log('/'+item_name+'s/new?stock='+stock+'+&sector='+sector+'  #new_'+item_name);
 	$('#add-item').load('/'+item_name+'s/new?stock='+stock+'+&sector='+sector+'  #new_'+item_name, function(){
 		primary_formatting();
+
 		$('#new_'+item_name).submit(function(event) {
 			event.preventDefault();
 		});
+		$('#new_'+item_name).scrollTop(0)
 		$('.hide').hide();
 	});
      $( "#add-item" ).dialog({
@@ -25,26 +27,48 @@ function add_window(item_name, width, height){
      			modal: true,
 				title: 'Add an item',
 				close: function(event, ui) {
-					$( "#add-item" ).remove(); 
+					$("#new_"+item_name+" textarea").each(function(index) { tinyMCE.execCommand('mceRemoveControl', false, $(this).attr('id')  ); });
+
+					$( "#add-item" ).remove();
+
 					//$('.recap-frais-consignation').load('/dossiers/'+$("#dossier_id").val()+'/encours_frais');
 					
 					},
      			buttons: {
-					"Enregistrer": function() {
+					"Save": function() {
 								
 								$('#new_'+item_name).ajaxSubmit();
                					$( this ).dialog( "close" );
-								$( "#add-item" ).remove(); 
 								location.reload(true);
 
                				},
-           				"Fermer": function() {
+           				"Close": function() {
                    					$( this ).dialog( "close" );
-									$( "#add-item" ).remove(); 
 
                    				}
                    	}			
      });
+}
+
+function processTextAreas(){
+  $('textarea').each(function(index) { 
+    if (!$(this).hasClass('hidden')){
+      hideDivWithTextArea($(this));
+    }
+  });
+}
+
+function hideDivWithTextArea(textarea){
+  var newDiv = jQuery('<div/>', {
+      id: textarea.attr('id')+'_html',
+      html: textarea[0].value
+  });
+  newDiv.height(textarea.height());
+  
+  newDiv.css('overflow', 'scroll');
+  textarea.parent().append(newDiv);
+  textarea.hide();
+  textarea.addClass('hidden');
 }
 
 function edit_window(item_name, id, width, height){
@@ -54,9 +78,15 @@ function edit_window(item_name, id, width, height){
 	console.log('/'+item_name+'s/'+id+'/edit  #edit_'+item_name);
 	$('#add-item').load('/'+item_name+'s/'+id+'/edit  #edit_'+item_name+'_'+id, function(){
 		primary_formatting();
+
+
 		$('#edit_'+item_name).submit(function(event) {
 			event.preventDefault();
 		});
+		
+	//	console.log('#edit_'+item_name+'_'+id)
+		//$('#edit_'+item_name+'_'+id+' :input:visible:first').focus();
+		//$('#edit_'+item_name+'_'+id).scrollTop(0)
 		$('.hide').hide();
 	});
      $( "#add-item" ).dialog({
@@ -65,50 +95,58 @@ function edit_window(item_name, id, width, height){
      			modal: true,
 				title: 'Edit an item',
 				close: function(event, ui) {
+
 					$( "#add-item" ).remove(); 
-					//$('.recap-frais-consignation').load('/dossiers/'+$("#dossier_id").val()+'/encours_frais');
 					
 					},
      			buttons: {
-					"Supprimer": function() {
+					"Delete": function() {
 								
 								$.post('/'+item_name+'s/'+id+'/destroy')
                					$( this ).dialog( "close" );
-								$( "#add-item" ).remove(); 
 								location.reload(true);
 								
 								
 
                				},
-					"Enregistrer": function() {
+					"Save": function() {
 								
-								$('#new_'+item_name).ajaxSubmit();
+								$('#edit_'+item_name+'_'+id).ajaxSubmit();
                					$( this ).dialog( "close" );
-								$( "#add-item" ).remove(); 
 								location.reload(true);
 
                				},
-           				"Fermer": function() {
+           				"Close": function() {
                    					$( this ).dialog( "close" );
-									$( "#add-item" ).remove(); 
 
                    				}
                    	}			
      });
 }
 
+var savedFormsCount;
 
+function saveForms() {
+  savedFormsCount = 1;
+  $.blockUI({ message: '<h1>Sauvegarde en cours ...</h1>' });
+  
+	$.each($('form'), function(key, value) { 
+			submit_form($(value));
+		})
+}
 
 
 function submit_form(form){
-	if (window.tinyMCE){tinyMCE.triggerSave();};	
 	form.ajaxSubmit({
 		success:function(){
+		  savedFormsCount +=1;
 			$("#save").removeClass("ui-state-active");
-	       $.growlUI('', 'Modifications enregistrées !'); 
+	    if (savedFormsCount==$('form').length){
+	      $.unblockUI();
+	      $.growlUI('', 'Modifications enregistrées !'); 
+	    }
 		}
-		});
-	
+		});	
 }
 
 
@@ -135,7 +173,7 @@ function add_user(item_name, width, height){
 					
 					},
      			buttons: {
-					"Enregistrer": function() {
+					"Save": function() {
 								
 								$('#new_'+item_name).ajaxSubmit({url:'settings/new_user'});
                					$( this ).dialog( "close" );
@@ -143,7 +181,7 @@ function add_user(item_name, width, height){
 								location.reload(true);
 
                				},
-           				"Fermer": function() {
+           				"Close": function() {
                    					$( this ).dialog( "close" );
 									$( "#add-item" ).remove(); 
 
@@ -175,7 +213,7 @@ function edit_user(item_name, id, width, height){
 					
 					},
      			buttons: {
-					"Supprimer": function() {
+					"Delete": function() {
 								
 								$.post('/settings/'+id+'/destroy_user')
                					$( this ).dialog( "close" );
@@ -185,7 +223,7 @@ function edit_user(item_name, id, width, height){
 								
 
                				},
-					"Enregistrer": function() {
+					"Save": function() {
 								
 								$('#edit_'+item_name+'_'+id).ajaxSubmit({url:'/settings/'+id+'/update_user'});
                					$( this ).dialog( "close" );
@@ -193,7 +231,7 @@ function edit_user(item_name, id, width, height){
 								location.reload(true);
 
                				},
-           				"Fermer": function() {
+           				"Close": function() {
                    					$( this ).dialog( "close" );
 									$( "#add-item" ).remove(); 
 
@@ -236,6 +274,15 @@ function remove_sector(){
 	  dataType: 'json'
 	});
 }
+
+
+
+function loadinparent(url){
+	self.opener.location = url;
+ 
+}
+
+
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 /*

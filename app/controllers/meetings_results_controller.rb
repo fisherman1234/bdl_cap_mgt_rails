@@ -1,5 +1,5 @@
 class MeetingsResultsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:create, :destroy, :new, :update]
   # GET /meetings_results
   # GET /meetings_results.xml
   def index
@@ -43,6 +43,10 @@ class MeetingsResultsController < ApplicationController
   # POST /meetings_results
   # POST /meetings_results.xml
   def create
+  	#if params[:meetings_result][:meeting_date] && !params[:meetings_result][:meeting_date].empty?
+  #  	params[:meetings_result][:meeting_date] = DateTime.strptime(params[:meetings_result][:meeting_date], "%d/%m/%Y").strftime("%Y-%m-%d")
+    #end
+
     @meetings_result = MeetingsResult.new(params[:meetings_result])
 
     respond_to do |format|
@@ -59,7 +63,11 @@ class MeetingsResultsController < ApplicationController
   # PUT /meetings_results/1
   # PUT /meetings_results/1.xml
   def update
+  
     @meetings_result = MeetingsResult.find(params[:id])
+    #if params[:meetings_result][:meeting_date] && !params[:meetings_result][:meeting_date].empty?
+    #	params[:meetings_result][:meeting_date] = DateTime.strptime(params[:meetings_result][:meeting_date], "%d/%m/%Y").strftime("%Y-%m-%d")
+   	#end 
 
     respond_to do |format|
       if @meetings_result.update_attributes(params[:meetings_result])

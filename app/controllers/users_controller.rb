@@ -22,6 +22,8 @@ class UsersController < ApplicationController
   # GET /users/1.xml
   def show
     @user = current_user
+    @stocks_today = current_user.stocks.find(:all, :conditions => ["flagged = 1 AND flag_date < NOW() "])
+    
     @title = "Home"
     respond_to do |format|
       format.html # show.html.erb
@@ -86,6 +88,15 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(users_url) }
       format.xml  { head :ok }
+    end
+  end
+  
+  def stocks_of_the_day
+    @stocks = current_user.stocks.find(:all, :conditions => ["flagged = 1 AND flag_date < NOW() "])
+    if !@stocks.empty?
+      render :layout => false
+    else
+      render :nothing => true
     end
   end
 end

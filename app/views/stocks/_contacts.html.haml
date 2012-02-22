@@ -7,9 +7,9 @@
     %th Name
     %th Position
     %th Email
-    %th Téléphone
+    %th Phone
   %tbody
-    - @stock.contacts.each do |mr|
+    - @stock.contacts.sort_by! { |a| [ a.name || '' ]}.each do |mr|
       %tr
         %td= mr.job_title
         %td

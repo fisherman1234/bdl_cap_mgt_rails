@@ -1,0 +1,12 @@
+ALTER TABLE `Contacts` ENGINE = MyISAM;
+ALTER TABLE `Stocks` ENGINE = MyISAM;
+ALTER TABLE `Meetings_Results` ENGINE = MyISAM;
+ALTER TABLE `Details` ENGINE = MyISAM;
+ALTER TABLE `BDL_Discussions` ENGINE = MyISAM;
+
+ALTER TABLE `BDL_Discussions` ADD FULLTEXT (View_BDL,Position_BDL) ;
+ALTER TABLE `Contacts` ADD FULLTEXT (Job_Title,Name,Email,Title,Telephone) ;
+ALTER TABLE `Meetings_Results` ADD FULLTEXT (Meeting_Contact,Meeting_Notes,Meeting_Conclusions) ;
+ALTER TABLE `Details` ADD FULLTEXT (Sector_Analysis_Title,Sector_Analysis_Text) ;
+ALTER TABLE `Stocks` ADD FULLTEXT (Stock_Name,Environment,Business_Description,Competition,Management,Investment_Case,Investment_Risks_Macro,Investment_Risks_Micro) ;
+

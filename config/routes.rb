@@ -21,8 +21,8 @@ BdlCapitalManagement::Application.routes.draw do
   match 'settings/:id/destroy_user', :to => 'settings#destroy_user', :method => :post 
   match 'settings/search', :to => 'settings#search' , :method => :get  
   match '/up', :to => 'settings#up' , :method => :get  
-  match '/uploadFile', :to => 'settings#uploadFile' , :method => :get 
-  
+  match '/uploadFile', :to => 'settings#uploadFile' , :method => :post 
+  match '/stocks_of_the_day', :to => "users#stocks_of_the_day", :method => :get
 
   match 'stocks/:id/destroy', :to => 'stocks#destroy', :method => :post 
   match 'sectors/:id/destroy', :to => 'sectors#destroy', :method => :post 
@@ -30,6 +30,10 @@ BdlCapitalManagement::Application.routes.draw do
   match 'details/:id/destroy', :to => 'details#destroy', :method => :post 
   match 'contacts/:id/destroy', :to => 'contacts#destroy', :method => :post 
   match 'bdl_discussions/:id/destroy', :to => 'bdl_discussions#destroy', :method => :post 
+  match 'stocks/:id/to_pdf', :to => 'stocks#to_pdf', :method => :get 
+  match 'details/:id/to_pdf', :to => 'details#to_pdf', :method => :get 
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

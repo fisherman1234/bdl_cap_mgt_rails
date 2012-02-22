@@ -1,0 +1,9 @@
+%h1 Stocks of the day
+%table
+  - @stocks.each do |stock|
+    %tr
+      %td
+        %a{:href=>"#",:onClick => "loadinparent('/stocks/"+stock.id.to_s+"/edit');"}=stock.stock_name
+  
+:javascript
+  function loadinparent(url){self.opener.location = url;}
