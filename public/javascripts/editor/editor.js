@@ -26,9 +26,26 @@ SferyxEditor.prototype.ReplaceTextarea = function() {
     var appletJarName = '/javascripts/editor/HTMLEditorAppletLight.jar';
 
     //var fieldName=document.getElementById(this.InstanceName).name;
-    var appletString = '' + '<applet code="sferyx.administration.editors.HTMLEditor" archive="' + appletJarName + '" style="width:' + this.Width + ';height:' + this.Height + ';" width="' + this.Width + '" height="' + this.Height + '" name="sfrx_htmleditor" id="' + this.InstanceName + '">' + 'To start Sferyx HTML Editor applet Java Plug-in 1.4 is required. Get it here: http://java.sun.com/products/plugin/1.4/plugin-install.html' + '<PARAM NAME ="supressRemoteFileDialog" VALUE="false">' + '<PARAM NAME ="supressLocalFileDialog" VALUE="false">' + '<PARAM NAME ="initialURLEncodedContent" VALUE="' + escape(document.getElementById(this.InstanceName.replace('_sferyx', '')).value) + '">' + '<PARAM NAME ="uploadContentAsMultipartFormData" VALUE="true">' + '<PARAM NAME ="saveURL" VALUE="http://192.168.15.3/uploadFile">' + '<PARAM NAME ="generateUniqueImageFilenames" VALUE="true">' + '<PARAM NAME="useSaveAsSaveRemote" VALUE="true">' +
-    //'<PARAM NAME ="useFixedFileNameNamingRule" VALUE="NewFile">'+ 
-    '<PARAM NAME = "uploadedObjectsTranslationPath" VALUE="http://192.168.15.3/upload">' + '<PARAM NAME="useFlowToolbarLayout" VALUE="true">' + '<PARAM name="mainMenuVisible"  value="false">' + '<PARAM name="statusbarVisible"  value="false">' + '<PARAM name="sourceEditorVisible"  value="false">' + '<PARAM name="previewVisible"  value="false">' + ' <PARAM NAME="singleParagraphSpacing" VALUE="true">' + '<PARAM name="toolbarItemsToRemove"  value="' + this.ToolbarSet + '">' + '</applet>';
+    var appletString = '' 
+    + '<applet code="sferyx.administration.editors.HTMLEditor" archive="' + appletJarName + '" style="width:' + this.Width + ';height:' + this.Height + ';" width="' + this.Width + '" height="' + this.Height + '" name="sfrx_htmleditor" id="' + this.InstanceName + '">' 
+    + 'To start Sferyx HTML Editor applet Java Plug-in 1.4 is required. Get it here: http://java.sun.com/products/plugin/1.4/plugin-install.html' 
+    + '<PARAM NAME ="supressRemoteFileDialog" VALUE="false">' 
+    + '<PARAM NAME ="supressLocalFileDialog" VALUE="false">' 
+    + '<PARAM NAME ="initialURLEncodedContent" VALUE="' + escape(document.getElementById(this.InstanceName.replace('_sferyx', '')).value) + '">' 
+    + '<PARAM NAME ="uploadContentAsMultipartFormData" VALUE="true">' 
+    + '<PARAM NAME ="saveURL" VALUE="http://192.168.15.3/uploadFile">' 
+    + '<PARAM NAME ="generateUniqueImageFilenames" VALUE="true">' 
+    + '<PARAM NAME="useSaveAsSaveRemote" VALUE="true">' 
+    + //'<PARAM NAME ="useFixedFileNameNamingRule" VALUE="NewFile">'
+    + '<PARAM NAME = "uploadedObjectsTranslationPath" VALUE="http://192.168.15.3/upload">' 
+    + '<PARAM NAME="useFlowToolbarLayout" VALUE="true">' 
+    + '<PARAM name="mainMenuVisible"  value="false">' 
+    + '<PARAM name="statusbarVisible"  value="false">' 
+    + '<PARAM name="sourceEditorVisible"  value="false">' 
+    + '<PARAM name="previewVisible"  value="false">' 
+    + ' <PARAM NAME="singleParagraphSpacing" VALUE="true">' 
+    + '<PARAM name="toolbarItemsToRemove"  value="' + this.ToolbarSet + '">' 
+    + '</applet>';
 
     if (_ie) {
         document.getElementById(this.InstanceName.replace('_sferyx', '_temp')).outerHTML = appletString;
