@@ -1,11 +1,10 @@
 %div#navbar
   %ul
     %li
-      
+      %a{:href=>"javascript:saveForms()"} Save
       %a{:href=>"javascript:history.back()"} Back
       %a{:href=>"/"} Home
       %a{:href=>"/stocks/"+@stock.id.to_s} Print
-      %a{:href=>"javascript:saveForms()"} Enregistrer tout
       
 %div#page-content
   = render 'form'
