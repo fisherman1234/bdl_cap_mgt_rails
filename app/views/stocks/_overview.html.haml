@@ -75,7 +75,7 @@
             %td
               %h3 Investment case
           %tr
-            %td{:colspan=>2,:style=>'min-width:800px'}= f.text_area :investment_case
+            %td{:colspan=>2,:style=>'min-width:800px', :class => "ui-widget-content ui-corner-all", :border => "0"}= f.text_area :investment_case
           %tr
             %td{:colspan=>2,:style=>'width:100%'}
               %a{:href=>"#", :onclick=>  'DisplayPopUpEditor("stock_investment_case", "stock[investment_case]");',:class => "button-edit"} Edit
