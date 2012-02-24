@@ -31,7 +31,7 @@ SferyxEditor.prototype.ReplaceTextarea = function() {
     + 'To start Sferyx HTML Editor applet Java Plug-in 1.4 is required. Get it here: http://java.sun.com/products/plugin/1.4/plugin-install.html' 
     + '<PARAM NAME ="supressRemoteFileDialog" VALUE="false">' 
     + '<PARAM NAME ="supressLocalFileDialog" VALUE="false">' 
-    + '<PARAM NAME ="initialURLEncodedContent" VALUE="' + escape(document.getElementById(this.InstanceName.replace('_sferyx', '')).value) + '">' 
+    + '<PARAM NAME ="initialURLEncodedContent" VALUE="' + encodeURIComponent(document.getElementById(this.InstanceName.replace('_sferyx', '')).value) + '">' 
     + '<PARAM NAME ="uploadContentAsMultipartFormData" VALUE="true">' 
     + '<PARAM NAME ="saveURL" VALUE="http://192.168.15.3/uploadFile">' 
     + '<PARAM NAME ="generateUniqueImageFilenames" VALUE="true">' 

@@ -26,7 +26,7 @@
       %h3 Available analysis
       %ul
         - if @stock.sector
-          - @stock.sector.details.sort_by! { |a| [ a.sector_analysis_title || '' ]}.each do |detail|
+          - @stock.sector.details.sort_by { |a| [ a.sector_analysis_title || '' ]}.each do |detail|
             %li
               %a{:href=>'/details/'+detail.id.to_s+'/edit'}= detail.sector_analysis_title
       %p

@@ -9,7 +9,7 @@
     %th Job title
     %th Stock
   %tbody
-    - @contacts.sort_by! { |a| [ a.stock.stock_name, a.name || '' ]}.each do |contact|
+    - @contacts.sort_by { |a| [ a.stock.stock_name, a.name || '' ]}.each do |contact|
       %tr
         %td= link_to contact.name, edit_contact_path(contact) 
         %td= contact.title

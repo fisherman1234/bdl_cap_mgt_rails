@@ -4,10 +4,9 @@
 %table{:border=>0, :class=>"main-form"}
   %thead
     %th{:width => "10%"} Meeting type
-    %th{:width => "30%"} Object
+    %th{:width => "35%"} Object
     %th{:width => "10%"} Meeting date
-    %th{:width => "30%"} Conclusions
-    %th{:width => "10%"} Contact
+    %th{:width => "35%"} Conclusions
     %th{:width => "10%"} BDL Contact
   %tbody
     - @stock.meetings_results.sort_by {|a| a.send(:meeting_date) || Date.new(2000,01,01)}.reverse.each do |mr|
@@ -18,5 +17,4 @@
         %td
           %a{:href=>"#", :onclick=>"edit_window('meetings_result',"+mr.id.to_s+", 1000, 500)"}= mr.meeting_date
         %td= truncate(strip_tags(mr.meeting_conclusions), :length => 100, :omission => '... (extrait)')
-        %td= mr.meeting_contact
         %td= mr.user.try(:initiales)

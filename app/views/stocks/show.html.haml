@@ -5,10 +5,10 @@
       %a{:href=>"javascript:history.back()"} Back
       %a{:href=>"/"} Home
       %a{:href=>"/stocks/"+@stock.id.to_s+"/to_pdf"} To pdf
-      %a{:href=>"#", :onClick => "window.print();"} Print
+      %a{:href=>"javascript:void(0)", :onClick => "window.print();"} Print
 
 %div#page-content
-  %a{:href=>"#", :onclick=>"$('#stock-div').toggle()"} Show/Hide stock
+  %a{:href=>"javascript:void(0)", :onclick=>"$('#stock-div').toggle()"} Show/Hide stock
   %div#stock-div
     %h3 Stock
     %table{:class=>"main-form"}
@@ -40,14 +40,14 @@
       %tr
         %td 
           Environment
-          %a{:href=>"#", :onclick => "$('#environment-section').toggle()"} Show/Hide
+          %a{:href=>"javascript:void(0)", :onclick => "$('#environment-section').toggle()"} Show/Hide
         %td
           %div#environment-section= sanitize(@stock.environment)
       
       %tr
         %td 
           Business description
-          %a{:href=>"#", :onclick => "$('#environment-businessdesc').toggle()"} Show/Hide
+          %a{:href=>"javascript:void(0)", :onclick => "$('#environment-businessdesc').toggle()"} Show/Hide
         %td
           %div#environment-businessdesc= sanitize(@stock.business_description)
       %tr
@@ -71,7 +71,7 @@
         %td Investment risk micro
         %td= sanitize(@stock.investment_risks_micro)
  
-  %a{:href=>"#", :onclick=>"$('#contact-section').toggle()"} Show/Hide contacts
+  %a{:href=>"javascript:void(0)", :onclick=>"$('#contact-section').toggle()"} Show/Hide contacts
 
   %div#contact-section
     %h3 Contacts
@@ -87,12 +87,12 @@
           %tr
             %td= mr.job_title
             %td
-              %a{:href=>"#", :onclick=>"edit_window('contact',"+mr.id.to_s+", 1000, 300)"}= mr.name
+              %a{:href=>"javascript:void(0)", :onclick=>"edit_window('contact',"+mr.id.to_s+", 1000, 300)"}= mr.name
             %td= mr.title
             %td= mr.email
             %td= mr.telephone
 
-  %a{:href=>"#", :onclick=>"$('#discussions-section').toggle()"} Show/Hide discussions
+  %a{:href=>"javascript:void(0)", :onclick=>"$('#discussions-section').toggle()"} Show/Hide discussions
   %div#discussions-section
     %h3 BDL Discussions
     - @stock.bdl_discussions.sort_by {|a| a.send(:discussion_date) || Date.new(2000,01,01)}.reverse.each do |discussion|
@@ -110,7 +110,7 @@
           %td BDL View
           %td= sanitize (discussion.view_bdl)
       
-  %a{:href=>"#", :onclick=>"$('#meetings-section').toggle()"} Show/Hide meetings
+  %a{:href=>"javascript:void(0)", :onclick=>"$('#meetings-section').toggle()"} Show/Hide meetings
   %div#meetings-section
     %h3 Meetings results
     - @stock.meetings_results.sort_by {|a| a.send(:meeting_date) || Date.new(2000,01,01)}.reverse.each do |discussion|
