@@ -27,7 +27,7 @@ function add_window(item_name, width, height){
      			modal: true,
 				title: 'Add an item',
 				close: function(event, ui) {
-					$("#new_"+item_name+" textarea").each(function(index) { tinyMCE.execCommand('mceRemoveControl', false, $(this).attr('id')  ); });
+					//$("#new_"+item_name+" textarea").each(function(index) { tinyMCE.execCommand('mceRemoveControl', false, $(this).attr('id')  ); });
 
 					$( "#add-item" ).remove();
 
