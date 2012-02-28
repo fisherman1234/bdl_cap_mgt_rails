@@ -33,7 +33,7 @@ SferyxEditor.prototype.ReplaceTextarea = function() {
     + '<PARAM NAME ="supressLocalFileDialog" VALUE="false">' 
     + '<PARAM NAME ="initialURLEncodedContent" VALUE="' + encodeURIComponent(document.getElementById(this.InstanceName.replace('_sferyx', '')).value) + '">' 
     + '<PARAM NAME ="uploadContentAsMultipartFormData" VALUE="true">' 
-    //+ '<PARAM NAME ="saveURL" VALUE="http://192.168.15.3/uploadFile">' 
+    + '<PARAM NAME ="saveURL" VALUE="http://192.168.15.3/uploadFile">' 
     + '<PARAM NAME ="generateUniqueImageFilenames" VALUE="true">' 
     + '<PARAM NAME="useSaveAsSaveRemote" VALUE="true">' 
     + //'<PARAM NAME ="useFixedFileNameNamingRule" VALUE="NewFile">'
