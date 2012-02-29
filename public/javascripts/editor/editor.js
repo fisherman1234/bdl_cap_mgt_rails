@@ -72,10 +72,8 @@ SferyxEditor.prototype.ReplaceTextarea = function() {
 };
 
 SferyxEditor.prototype.UploadData = function() {
-
     var htmlEditor = document.getElementById(this.InstanceName);
     htmlEditor.saveToDefaultLocation();
-
 };
 
 SferyxEditor.prototype.ReplaceEditor = function(name) {

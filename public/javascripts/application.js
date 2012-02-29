@@ -94,6 +94,9 @@ function edit_window(item_name, id, width, height){
      			width: width,
      			modal: true,
 				title: 'Edit an item',
+				open: function(event, ui){
+				  $(".ui-dialog-buttonpane button:first").css('margin-right', '800px');
+				},
 				close: function(event, ui) {
 
 					$( "#add-item" ).remove(); 

@@ -43,9 +43,9 @@ class MeetingsResultsController < ApplicationController
   # POST /meetings_results
   # POST /meetings_results.xml
   def create
-  	#if params[:meetings_result][:meeting_date] && !params[:meetings_result][:meeting_date].empty?
-  #  	params[:meetings_result][:meeting_date] = DateTime.strptime(params[:meetings_result][:meeting_date], "%d/%m/%Y").strftime("%Y-%m-%d")
-    #end
+  	if params[:meetings_result][:meeting_date] && !params[:meetings_result][:meeting_date].empty?
+    	params[:meetings_result][:meeting_date] = DateTime.strptime(params[:meetings_result][:meeting_date], "%d/%m/%Y").strftime("%Y-%m-%d")
+    end
 
     @meetings_result = MeetingsResult.new(params[:meetings_result])
 
@@ -65,9 +65,9 @@ class MeetingsResultsController < ApplicationController
   def update
   
     @meetings_result = MeetingsResult.find(params[:id])
-    #if params[:meetings_result][:meeting_date] && !params[:meetings_result][:meeting_date].empty?
-    #	params[:meetings_result][:meeting_date] = DateTime.strptime(params[:meetings_result][:meeting_date], "%d/%m/%Y").strftime("%Y-%m-%d")
-   	#end 
+    if params[:meetings_result][:meeting_date] && !params[:meetings_result][:meeting_date].empty?
+    params[:meetings_result][:meeting_date] = DateTime.strptime(params[:meetings_result][:meeting_date], "%d/%m/%Y").strftime("%Y-%m-%d")
+   	end
 
     respond_to do |format|
       if @meetings_result.update_attributes(params[:meetings_result])

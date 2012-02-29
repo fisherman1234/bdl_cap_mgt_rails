@@ -12,7 +12,7 @@
     - @stock.meetings_results.sort_by {|a| a.send(:meeting_date) || Date.new(2000,01,01)}.reverse.each do |mr|
       %tr
         %td
-          %a{:href=>"#", :onclick=>"edit_window('meetings_result',"+mr.id.to_s+", 1000, 500)"}= mr.meeting_type
+          %a{:href=>"#", :onclick=>"edit_window('meetings_result',"+mr.id.to_s+", 1000, 500)"}= mr.meeting_type.to_s+' (...)'
         %td= mr.meeting_object
         %td
           %a{:href=>"#", :onclick=>"edit_window('meetings_result',"+mr.id.to_s+", 1000, 500)"}= mr.meeting_date
