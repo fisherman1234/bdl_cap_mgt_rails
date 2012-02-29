@@ -24,6 +24,8 @@ BdlCapitalManagement::Application.routes.draw do
   match '/uploadFile', :to => 'settings#uploadFile' , :method => :post 
   match '/stocks_of_the_day', :to => "users#stocks_of_the_day", :method => :get
 
+  match 'details/:id/destroy', :to => 'details#destroy', :method => :post 
+
   match 'stocks/:id/destroy', :to => 'stocks#destroy', :method => :post 
   match 'sectors/:id/destroy', :to => 'sectors#destroy', :method => :post 
   match 'meetings_results/:id/destroy', :to => 'meetings_results#destroy', :method => :post 

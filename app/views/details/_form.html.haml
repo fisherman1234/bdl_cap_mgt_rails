@@ -6,6 +6,7 @@
       %a{:href=>"/details/"+@detail.id.to_s} Print
       %a{:href=>"/"} Home
 
+
 %div#page-content
   - form_for(@detail) do |f|
     %table{:class=>"main-form"}
@@ -23,3 +24,7 @@
       %tr{:class=>'hide'}
         %td
         %td= f.submit
+        
+%br
+%p
+  %a{:href=>"/details/#{@detail.id}/destroy", :class => "button-minus"} Supprimer
