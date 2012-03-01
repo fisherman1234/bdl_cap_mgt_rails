@@ -13,7 +13,7 @@
       %tr
         %td= mr.job_title
         %td
-          %a{:href=>"#", :onclick=>"edit_window('contact',"+mr.id.to_s+", 1000, 300)"}= mr.name
+          %a{:href=>"#", :onclick=>"edit_window('contact',"+mr.id.to_s+", 1000, 300)"}= mr.name.to_s+'(...)'
         %td= mr.title
         %td= mr.email
         %td= mr.telephone

@@ -5,7 +5,7 @@ function primary_formatting(){
 	$( ".button-edit" ).button({ icons: {primary:'ui-icon-pencil'}});
 	
 	$( ".button-save" ).button({ icons: {primary:'ui-icon-disk'}});
-	$(".phone").mask("+99.9.99.99.99.99");
+	//$(".phone").mask("+99.9.99.99.99.99");
 	$("input").addClass("ui-widget-content ui-corner-all");
 	$("textarea").addClass("ui-widget-content ui-corner-all");
 	$(":submit").css("background","#F3E2A9");
